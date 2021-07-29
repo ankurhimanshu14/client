@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
         margin: 4,
         backgroundColor: "black"
     },
+    icon: {
+        backgroundColor: red[500]
+      }
 }));
 const Navbar = () => {
     const classes = useStyles();
@@ -38,6 +41,28 @@ const Navbar = () => {
     const handleDrawer = () => {
         setOpen(!open);
     }
+
+    const [data, setData] = React.useState({
+        traffic: 0,
+        newUsers: 0,
+        sales: 0,
+        performance: 0
+    });
+
+    React.useEffect(() => {
+        let trafficData = 204506;
+        let newUserdata = 2000;
+        let salesData = 35060;
+        let performanceData = 45;
+
+        setData({
+            traffic: trafficData,
+            newUser: newUserdata,
+            sales: salesData,
+            performance: performanceData
+        });
+    }, [data])
+
 
     return (
         <div>
@@ -64,10 +89,10 @@ const Navbar = () => {
         </AppBar>
         <Drawer width="30" />
         <Grid position="absolute" style={{marginTop: "-250px"}} container direction="row" justifyContent="space-around" alignItems="center">
-            <Infobox name="TOTAL TRAFFIC" data="204, 506" percent="2" icon={<TrafficSharpIcon style={{color: red[500]}}/>} />
-            <Infobox name="NEW USERS" data="204, 506" percent="2" icon={<PersonAddSharpIcon style={{color: green[500]}}/>} />
-            <Infobox name="SALES" data="204, 506" percent="2" icon={<TrendingUpSharp style={{color: blue[500]}}/>} />
-            <Infobox name="PERFORMANCE" data="204, 506" percent="2" icon={<BarChartSharpIcon style={{color: orange[500]}}/>} />
+            <Infobox className={classes.icon} name="TOTAL TRAFFIC" data={data.traffic} percent="2" icon={<TrafficSharpIcon style={{color: red[500]}}/>} />
+            <Infobox name="NEW USERS" data={data.newUser} percent="-2" icon={<PersonAddSharpIcon style={{color: green[500]}}/>} />
+            <Infobox name="SALES" data={data.sales} percent="2" icon={<TrendingUpSharp style={{color: blue[500]}}/>} />
+            <Infobox name="PERFORMANCE" data={data.performance} percent="-3" icon={<BarChartSharpIcon style={{color: orange[500]}}/>} />
         </Grid>
         </div>
     )

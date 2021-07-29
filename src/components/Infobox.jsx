@@ -1,8 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { green, red, blue, orange } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { ArrowDownward, ArrowUpward } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     maxHeight: '100%',
   },
+
 }));
 
 const Infobox = (props) => {
@@ -42,6 +45,12 @@ const Infobox = (props) => {
                   {props.data}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
+                  {
+                  (props.percent > 0) ?
+                  <ArrowUpward style={{color: green[500]}}/>
+                  :
+                  <ArrowDownward style={{color: red[500]}}/>
+                  } 
                   {props.percent}% Since last month
                 </Typography>
               </Grid>

@@ -1,13 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LineChart from './components/LineChart';
 import Navbar from './components/Navbar';
+
+const dimensions = {
+  width: 600,
+  height: 300,
+  margin: { top: 30, right: 30, bottom: 30, left: 60 }
+};
 
 const App = () => {
   return (
     <>
     <Navbar />
-    <LineChart />
     </>
   )
 }
