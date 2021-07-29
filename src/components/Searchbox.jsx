@@ -10,12 +10,13 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 50,
     width: 300,
     borderRadius: 100,
-    color: "lightgrey",
-    border: "lightgrey 2px solid",
+    color: "white",
+    border: "white 2px solid",
     backgroundColor: "#5e72e4"
   },
   input: {
     marginLeft: theme.spacing(1),
+    color: "white !important"
   },
   iconButton: {
     padding: 10,
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   divider: {
     height: 28,
     margin: 4,
-    backgroundColor: "lightgrey"
+    backgroundColor: "white"
   },
 }));
 
@@ -38,6 +39,7 @@ const Searchbox = () => {
         className={classes.input}
         placeholder="Search..."
         inputProps={{ 'aria-label': 'search' }}
+        focused
       />
     </Paper>
   );
