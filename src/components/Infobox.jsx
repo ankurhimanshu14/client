@@ -31,6 +31,18 @@ const useStyles = makeStyles((theme) => ({
 const Infobox = (props) => {
   const classes = useStyles();
 
+  const [data, setData] = React.useState({
+    value: 0
+});
+
+React.useEffect(() => {
+    let val = 2045;
+
+    setData({
+        value: val
+    });
+}, [data])
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -42,7 +54,7 @@ const Infobox = (props) => {
                   {props.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  {props.data}
+                  {data.value}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                   {
