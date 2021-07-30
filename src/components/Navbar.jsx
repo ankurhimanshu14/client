@@ -1,7 +1,6 @@
 import React from 'react';
 import * as path from 'path';
 import { Grid, AppBar, Toolbar, IconButton, makeStyles, Drawer } from '@material-ui/core';
-import { green, red, blue, orange } from '@material-ui/core/colors';
 import MenuSharpIcon from '@material-ui/icons/MenuSharp';
 import TrafficSharpIcon from '@material-ui/icons/TrafficSharp';
 import PersonAddSharpIcon from '@material-ui/icons/PersonAddSharp';
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "black"
     },
     icon: {
-        backgroundColor: red[500]
+        backgroundColor: "#f5365c"
       }
 }));
 const Navbar = () => {
@@ -62,15 +61,14 @@ const Navbar = () => {
                         </IconButton>
                     </Grid>
                 </Grid>
-
             </Toolbar>
         </AppBar>
         <Drawer width="30" />
         <Grid position="absolute" style={{marginTop: "-250px"}} container direction="row" justifyContent="space-around" alignItems="center">
-            <Infobox className={classes.icon} name="TOTAL TRAFFIC" percent="2" icon={<TrafficSharpIcon style={{color: red[500]}}/>} />
-            <Infobox name="NEW USERS" percent="-2" icon={<PersonAddSharpIcon style={{color: green[500]}}/>} />
-            <Infobox name="SALES" percent="2" icon={<TrendingUpSharp style={{color: blue[500]}}/>} />
-            <Infobox name="PERFORMANCE" percent="-3" icon={<BarChartSharpIcon style={{color: orange[500]}}/>} />
+            <Infobox className={classes.icon} name="TOTAL TRAFFIC" percent="2" icon={<TrafficSharpIcon style={{color: "#f5365c"}}/>} />
+            <Infobox name="NEW USERS" percent="-2" icon={<PersonAddSharpIcon style={{color: "#2dce89"}}/>} />
+            <Infobox name="SALES" percent="2" icon={<TrendingUpSharp style={{color: "#11cdef"}}/>} />
+            <Infobox name="PERFORMANCE" percent="-3" icon={<BarChartSharpIcon style={{color: "#fb6340"}}/>} />
         </Grid>
         </div>
     )
