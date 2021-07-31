@@ -5,8 +5,8 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   canvas: {
-    width: "60%",
-    height: "30%",
+    width: "30%",
+    height: "auto",
     border: "1px solid black",
     borderRadius: "5px",
     backgroundColor: "#172b4d",
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 
-const LineChart = () => {
+const BarChart = () => {
   const classes = useStyles();
 	const chartRef = React.useRef();
 
@@ -24,7 +24,7 @@ const LineChart = () => {
     const ctx = chartRef.current.getContext("2d");
 		
 		const salesChart = new Chart(ctx, {
-			type: "line",
+			type: "bar",
       color: "#fff",
 			data: {
 				labels: ["April", "May", "June", "July", "August", "September", "October"],
@@ -33,7 +33,7 @@ const LineChart = () => {
 					label: "Monthly Sales Trend",
           color: "#fff",
 					borderColor: "#5e72e4",
-					backgroundColor: "#5e72e4",
+					backgroundColor: "#fb6340",
 					fill: false,
           tension: 0.2
 				}
@@ -66,4 +66,4 @@ const LineChart = () => {
     )
 }
 
-export default LineChart;
+export default BarChart;
