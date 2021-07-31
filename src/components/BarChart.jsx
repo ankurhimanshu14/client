@@ -1,20 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js/auto';
 import { getRelativePosition } from 'chart.js/helpers';
-import { makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  canvas: {
-    width: "30%",
-    height: "auto",
-    border: "1px solid black",
-    borderRadius: "5px",
-    backgroundColor: "#172b4d",
-    marginTop: "3%",
-    marginLeft: "5%"
-  }
-})
-
+import useStyles from '../assets/styleComponents';
 
 const BarChart = () => {
   const classes = useStyles();
@@ -57,7 +44,7 @@ const BarChart = () => {
   }, []);
 
   return (
-    <div className={classes.canvas}>
+    <div className={classes.barchartCanvas}>
       <canvas
       id="salesChart"
       ref={chartRef}
