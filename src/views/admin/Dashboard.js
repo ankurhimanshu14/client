@@ -6,6 +6,7 @@ import { Line, Bar } from "react-chartjs-2";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -29,6 +30,10 @@ import Header from "../../components/Headers/Header.js";
 
 const themeColors = require("../../assets/theme/colors.js").default;
 
+const format = (val) => {
+  return (val > 9) ? val : `0${val}`;
+}
+
 var colors = {
   gray: themeColors.gray,
   theme: {
@@ -48,19 +53,24 @@ var colors = {
 const useStyles = makeStyles(componentStyles);
 
 function Dashboard() {
+  const today = new Date();
   const classes = useStyles();
   const theme = useTheme();
   const [activeNav, setActiveNav] = React.useState(1);
   const [chartExample1Data, setChartExample1Data] = React.useState("data1");
+  const [startDate, setStartDate] = React.useState(`${today.getFullYear()}-${format(today.getMonth() + 1)}-01`);
+  const [endDate, setEndDate] = React.useState(`${today.getFullYear()}-${format(today.getMonth() + 1)}-${format(today.getDate())}`);
 
-  // if (window.Chart) {
-  //   parseOptions(Chart, chartOptions());
-  // }
-
-  const toggleNavs = (index) => {
-    setActiveNav(index);
-    setChartExample1Data("data" + index);
+  const handleSubmit = async () => {
+    const requestOptions = {
+      credentials: 'include'
   };
+
+  const response = await fetch('', requestOptions)
+  const data = await response.json();
+  setChartExample1Data(data);
+  }
+
   return (
     <>
       <Header />
@@ -121,12 +131,30 @@ function Dashboard() {
                         display="flex"
                         flexWrap="wrap"
                       >
+                      <TextField
+                      id="startDate"
+                      name="startDate"
+                      type="date"
+                      variant="outlined"
+                      value={startDate}
+                      onChange={e => setStartDate(e.target.value)}
+                      marginRight="1rem!important"
+                      />
+                      <TextField
+                      id="endDate"
+                      name="endDate"
+                      type="date"
+                      variant="outlined"
+                      marginRight="1rem!important"
+                      value={endDate}
+                      onChange={e => setEndDate(e.target.value)}
+                      />
                         <Button
                           variant="contained"
                           color="primary"
                           component={Box}
                           marginRight="1rem!important"
-                          onClick={() => toggleNavs(1)}
+                          onClick={() => handleSubmit() }
                           classes={{
                             root:
                               activeNav === 1
@@ -134,20 +162,7 @@ function Dashboard() {
                                 : classes.buttonRootUnselected,
                           }}
                         >
-                          Month
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={() => toggleNavs(2)}
-                          classes={{
-                            root:
-                              activeNav === 2
-                                ? ""
-                                : classes.buttonRootUnselected,
-                          }}
-                        >
-                          Week
+                          Submit
                         </Button>
                       </Box>
                     </Grid>
@@ -171,7 +186,7 @@ function Dashboard() {
               <CardHeader
                 title={
                   <Box component="span" color={theme.palette.gray[600]}>
-                    Performane
+                    Performance
                   </Box>
                 }
                 subheader="Total orders"
@@ -789,8 +804,8 @@ let chartExample1 = {
       yAxes: [
         {
           gridLines: {
-            color: colors.gray[900],
-            zeroLineColor: colors.gray[900],
+            color: colors.gray[100],
+            zeroLineColor: colors.gray[100],
           },
           ticks: {
             callback: function (value) {
@@ -821,22 +836,22 @@ let chartExample1 = {
   },
   data1: () => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
           label: "Performance",
-          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+          data: [10, 0, 20, 10, 30, 15, 40, 20, 60, 60],
         },
       ],
     };
   },
   data2: () => {
     return {
-      labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
           label: "Performance",
-          data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
+          data: [100, 0, 20, 5, 25, 10, 30, 15, 40, 40],
         },
       ],
     };
