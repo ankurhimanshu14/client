@@ -89,7 +89,7 @@ function Dashboard() {
     });
 }
 
-console.log(Object.values(list)[0]);
+const listedObj = Object.values(list);
 
   return (
     <>
@@ -266,8 +266,12 @@ console.log(Object.values(list)[0]);
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                      {list.map(val => 
-                          <TableRow>
+                      {listedObj.map(val => {
+                      <>
+                      {Object.entries(val).map((k, v) => {
+                        <>
+                        <span>{console.log(k)}</span>
+                        <TableRow key={v.payment}>
                           <TableCell
                             classes={{
                               root:
@@ -278,14 +282,15 @@ console.log(Object.values(list)[0]);
                             component="th"
                             variant="head"
                             scope="row"
+                            key={v.payment}
                           >
-                            {/* {val.data.key} */}
+                            {v.payment}
                           </TableCell>
                           <TableCell classes={{ root: classes.tableCellRoot }}>
-                            {val.payment}
+                            {v.data}
                           </TableCell>
                           <TableCell classes={{ root: classes.tableCellRoot }}>
-                            {val.totalclicks}
+                            {v.totalclicks}
                           </TableCell>
                           <Box
                             component={TableCell}
@@ -302,6 +307,10 @@ console.log(Object.values(list)[0]);
                             46,53%
                           </Box>
                         </TableRow>
+                        </>
+                      })}
+                       </>
+                       }
                       )}
                   </TableBody>
                 </Box>
