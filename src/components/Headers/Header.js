@@ -8,11 +8,12 @@ import Grid from "@material-ui/core/Grid";
 // @material-ui/icons components
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import EmojiEvents from "@material-ui/icons/EmojiEvents";
 import GroupAdd from "@material-ui/icons/GroupAdd";
-import InsertChartOutlined from "@material-ui/icons/InsertChartOutlined";
-import PieChart from "@material-ui/icons/PieChart";
-
+import PaymentSharpIcon from '@material-ui/icons/PaymentSharp';
+import TouchAppSharpIcon from '@material-ui/icons/TouchAppSharp';
+import TrendingUpSharpIcon from '@material-ui/icons/TrendingUpSharp';
+import ReceiptSharpIcon from '@material-ui/icons/ReceiptSharp';
+import AttachMoneySharpIcon from '@material-ui/icons/AttachMoneySharp';
 // core components
 import CardStats from "../Cards/CardStats.js";
 
@@ -37,7 +38,7 @@ const Header = () => {
       credentials: 'include'
     };
 
-    return fetch('https://mcashapi.xyz/api/v1/firebasefetch', requestOptions)
+    return fetch('https://mcashapi.xyz/api/v1/analytics', requestOptions)
     .then(res => res.json())
     .then(data => setVal({
       payment: data.data.payment,
@@ -50,7 +51,7 @@ const Header = () => {
   }
 
   React.useEffect(() => {
-    console.log(fetchData());
+    fetchData();
   }, []);
 
   return (
@@ -63,11 +64,11 @@ const Header = () => {
         >
           <div>
             <Grid container>
-              <Grid item xl={3} lg={6} xs={12}>
+              <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Payment"
-                  title={val.payment}
-                  icon={InsertChartOutlined}
+                  title={val.payment.toLocaleString()}
+                  icon={PaymentSharpIcon}
                   color="bgError"
                   footer={
                     <>
@@ -93,11 +94,11 @@ const Header = () => {
                   }
                 />
               </Grid>
-              <Grid item xl={3} lg={6} xs={12}>
+              <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
-                  subtitle="Total Clicks"
-                  title={val.totalclicks}
-                  icon={PieChart}
+                  subtitle="Clicks"
+                  title={val.totalclicks.toLocaleString()}
+                  icon={TouchAppSharpIcon}
                   color="bgWarning"
                   footer={
                     <>
@@ -123,11 +124,11 @@ const Header = () => {
                   }
                 />
               </Grid>
-              <Grid item xl={3} lg={6} xs={12}>
+              <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Conversion"
-                  title={val.totalconversion}
-                  icon={GroupAdd}
+                  title={val.totalconversion.toLocaleString()}
+                  icon={TrendingUpSharpIcon}
                   color="bgWarningLight"
                   footer={
                     <>
@@ -153,12 +154,12 @@ const Header = () => {
                   }
                 />
               </Grid>
-              <Grid item xl={3} lg={6} xs={12}>
+              <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Cr"
-                  title={val.totalcr}
-                  icon={GroupAdd}
-                  color="bgWarningLight"
+                  title={val.totalcr.toLocaleString()}
+                  icon={ReceiptSharpIcon}
+                  color="bgPrimaryLight"
                   footer={
                     <>
                       <Box
@@ -183,12 +184,42 @@ const Header = () => {
                   }
                 />
               </Grid>
-              <Grid item xl={3} lg={6} xs={12}>
+              <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
-                  subtitle="Total Revenue"
-                  title={val.totalrevenue}
-                  icon={EmojiEvents}
+                  subtitle="Payout"
+                  title={val.totalpayout.toLocaleString()}
+                  icon={GroupAdd}
                   color="bgInfo"
+                  footer={
+                    <>
+                      <Box
+                        component="span"
+                        fontSize=".875rem"
+                        color={theme.palette.warning.main}
+                        marginRight=".5rem"
+                        display="flex"
+                        alignItems="center"
+                      >
+                        <Box
+                          component={ArrowDownward}
+                          width="1.5rem!important"
+                          height="1.5rem!important"
+                        />{" "}
+                        1.10%
+                      </Box>
+                      <Box component="span" whiteSpace="nowrap">
+                        Since yesterday
+                      </Box>
+                    </>
+                  }
+                />
+              </Grid>
+              <Grid item xl={4} lg={6} xs={12}>
+                <CardStats
+                  subtitle="Revenue"
+                  title={val.totalrevenue.toLocaleString()}
+                  icon={AttachMoneySharpIcon}
+                  color="bgPrimary"
                   footer={
                     <>
                       <Box

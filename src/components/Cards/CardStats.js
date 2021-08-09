@@ -114,7 +114,7 @@ CardStats.propTypes = {
     "bgWarning",
     "bgWarningLight",
     "bgInfo",
-    "bgInfoLight",
+    "bgInfoLight"
   ]),
 };
 
