@@ -54,7 +54,19 @@ function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
   const [activeNav, setActiveNav] = React.useState(1);
-  const [chartExample1Data, setChartExample1Data] = React.useState("data1");
+  const [chartData, setChartData] = React.useState(
+    {
+      labels: [],
+      datasets: [
+        {
+          label: ['Payment', 'Clicks', 'Conversion', 'Cr', 'Payout', 'Revenue'],
+          data: [],
+          fill: false,          
+          borderColor: 'green'
+        }
+      ]
+    }
+  );
 
   const [date, setDate] = React.useState({
     startDate: null,
@@ -84,6 +96,19 @@ function Dashboard() {
     .then(res => res.json())
     .then(doc => {
         setList({list: doc})
+        setChartData(
+          {
+            labels: Object.keys(Object.values(list)[0].data),
+            datasets: [
+              {
+                label: ['Payment', 'Clicks'],
+                data: [[1, 1], [2, 3]],
+                fill: false,          
+                borderColor: 'white'
+              }
+            ]
+          }
+        )
     })
     .catch(err => {
         alert('There has been a problem with your fetch operation: ' + err);
@@ -261,7 +286,7 @@ const listedObj = Object.values(list);
                         marginBottom="0!important"
                       >
                         <Box component="span" color={theme.palette.white.main}>
-                          Sales value
+                          Analytics
                         </Box>
                       </Box>
                     </Grid>
@@ -270,12 +295,8 @@ const listedObj = Object.values(list);
                 classes={{ root: classes.cardHeaderRoot }}
               ></CardHeader>
               <CardContent>
-                <Box position="relative" height="350px">
-                  <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
-                  />
+                <Box position="relative" height="350px" width="100%">
+                  <Line data = {chartData}/>
                 </Box>
               </CardContent>
             </Card>
@@ -286,54 +307,5 @@ const listedObj = Object.values(list);
     </>
   );
 }
-
-let chartExample1 = {
-  options: {
-    scales: {
-      yAxes: [
-        {
-          gridLines: {
-            color: colors.gray[100],
-            zeroLineColor: colors.gray[100],
-          },
-          ticks: {
-            callback: function (value) {
-              if (!(value % 10)) {
-                return "$" + value + "k";
-              }
-            },
-          },
-        },
-      ],
-    },
-    tooltips: {
-      callbacks: {
-        label: function (item, data) {
-          var label = data.datasets[item.datasetIndex].label || "";
-          var yLabel = item.yLabel;
-          var content = "";
-
-          if (data.datasets.length > 1) {
-            content += label;
-          }
-
-          content += "$" + yLabel + "k";
-          return content;
-        },
-      },
-    },
-  },
-  data1: () => {
-    return {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [
-        {
-          label: ["Performance", "Sales"],
-          data: [[10, 0, 20, 10, 30, 15, 40, 20, 60, 60], [100, 0, 20, 5, 25, 10, 30, 15, 40, 40]]
-        },
-      ],
-    };
-  }
-};
 
 export default Dashboard;
