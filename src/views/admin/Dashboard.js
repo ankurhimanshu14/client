@@ -106,8 +106,8 @@ function Dashboard() {
   );
 
   const [date, setDate] = React.useState({
-    startDate: Date(Date() - 86400 * 30),
-    endDate: new Date(),
+    startDate: `${(new Date()).getMonth() + 1}-01-${(new Date()).getFullYear()}`,
+    endDate: `${(new Date()).getMonth() + 1}-${(new Date()).getDate()}-${(new Date()).getFullYear()}`,
   });
 
   const [list, setList] = React.useState([]);
@@ -143,14 +143,14 @@ function Dashboard() {
                 data: Object.values(doc.data).map(row => {return row.payment}),
                 lineTension: 0,
                 fill: false,          
-                borderColor: 'white',
+                borderColor: 'black',
               },
               {
                 label: 'Clicks',
                 data: Object.values(doc.data).map(row => {return row.totalclicks}),
                 lineTension: 0,
                 fill: false,          
-                borderColor: 'lightblue'
+                borderColor: 'blue'
               },
               {
                 label: 'Conversion',
@@ -252,7 +252,7 @@ const options = {
 };
 
 const listedObj = Object.values(list);
-
+console.log(listedObj);
   return (
     <>
       <Header />
@@ -382,18 +382,20 @@ const listedObj = Object.values(list);
             </Card>
           </Grid>
         
-        <Grid container xs={12}>
+          <Grid container xs={12} marginTop="3rem">
           <Grid
             item
             xs={12}
             xl={12}
             component={Box}
-            margin="3rem!important"
+            marginTop="3rem!important"
+            marginLeft="1rem!important"
+            marginBottom="3rem!important"
             classes={{ root: classes.gridItemRoot }}
           >
             <Card
               classes={{
-                root: classes.cardRoot + " " + classes.cardRootBgGradient,
+                root: classes.cardRoot,
               }}
             >
               <CardHeader
@@ -421,18 +423,21 @@ const listedObj = Object.values(list);
                         variant="h2"
                         marginBottom="0!important"
                       >
-                        <Box component="span" color={theme.palette.white.main}>
+                        <Box component="span" color={theme.palette.black.main}>
                           Analytics Trend
                         </Box>
                       </Box>
                     </Grid>
                   </Grid>
                 }
-                classes={{ root: classes.cardHeaderRoot }}
+                classes={{ root: classes.gridItemRoot }}
               ></CardHeader>
               <CardContent>
-                <Box position="relative" height="450px" width="100%">
-                  <Line data = {chartData} options = {options} />
+                <Box position="relative" height="500px">
+                  <Line
+                    data={chartData}
+                    options={options}
+                  />
                 </Box>
               </CardContent>
             </Card>

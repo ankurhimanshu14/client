@@ -1,12 +1,10 @@
-import boxShadows from "../../box-shadow.js";
-
 const componentStyles = (theme) => ({
   cardRootBgGradient: {
     background: "white"
   },
   cardRoot: {
-    boxShadow: boxShadows.boxShadow + "!important",
     border: "0!important",
+    width: "100%"
   },
   cardHeaderRoot: {
     backgroundColor: "white",

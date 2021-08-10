@@ -28,7 +28,7 @@ const Header = () => {
     payment: 0,
     totalclicks: 0,
     totalconversion: 0,
-    totalcr: "0",
+    totalcr: 0,
     totalpayout: 0,
     totalrevenue: 0
   });
@@ -67,31 +67,31 @@ const Header = () => {
               <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Payment"
-                  title={val.payment.toLocaleString()}
+                  title={<><span>&#8377;</span>{val.payment.toLocaleString()}</>}
                   icon={PaymentSharpIcon}
                   color="bgError"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.success.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowUpward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        3.48%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since last month
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.success.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowUpward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       3.48%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since last month
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
               <Grid item xl={4} lg={6} xs={12}>
@@ -100,28 +100,28 @@ const Header = () => {
                   title={val.totalclicks.toLocaleString()}
                   icon={TouchAppSharpIcon}
                   color="bgWarning"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.error.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowDownward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        3.48%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since last week
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.error.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowDownward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       3.48%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since last week
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
               <Grid item xl={4} lg={6} xs={12}>
@@ -130,118 +130,118 @@ const Header = () => {
                   title={val.totalconversion.toLocaleString()}
                   icon={TrendingUpSharpIcon}
                   color="bgWarningLight"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.warning.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowDownward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        1.10%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since yesterday
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.warning.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowDownward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       1.10%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since yesterday
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
               <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Cr"
-                  title={val.totalcr.toLocaleString()}
+                  title={`${val.totalcr.toLocaleString()}%`}
                   icon={ReceiptSharpIcon}
                   color="bgPrimaryLight"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.warning.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowDownward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        1.10%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since yesterday
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.warning.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowDownward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       1.10%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since yesterday
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
               <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Payout"
-                  title={val.totalpayout.toLocaleString()}
+                  title={<><span>&#8377;</span>{val.totalpayout.toLocaleString()}</>}
                   icon={GroupAdd}
                   color="bgInfo"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.warning.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowDownward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        1.10%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since yesterday
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.warning.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowDownward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       1.10%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since yesterday
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
               <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Revenue"
-                  title={val.totalrevenue.toLocaleString()}
+                  title={<><span>&#8377;</span>{val.totalrevenue.toLocaleString()}</>}
                   icon={AttachMoneySharpIcon}
                   color="bgPrimary"
-                  footer={
-                    <>
-                      <Box
-                        component="span"
-                        fontSize=".875rem"
-                        color={theme.palette.success.main}
-                        marginRight=".5rem"
-                        display="flex"
-                        alignItems="center"
-                      >
-                        <Box
-                          component={ArrowUpward}
-                          width="1.5rem!important"
-                          height="1.5rem!important"
-                        />{" "}
-                        10%
-                      </Box>
-                      <Box component="span" whiteSpace="nowrap">
-                        Since last month
-                      </Box>
-                    </>
-                  }
+                  // footer={
+                  //   <>
+                  //     <Box
+                  //       component="span"
+                  //       fontSize=".875rem"
+                  //       color={theme.palette.success.main}
+                  //       marginRight=".5rem"
+                  //       display="flex"
+                  //       alignItems="center"
+                  //     >
+                  //       <Box
+                  //         component={ArrowUpward}
+                  //         width="1.5rem!important"
+                  //         height="1.5rem!important"
+                  //       />{" "}
+                  //       10%
+                  //     </Box>
+                  //     <Box component="span" whiteSpace="nowrap">
+                  //       Since last month
+                  //     </Box>
+                  //   </>
+                  // }
                 />
               </Grid>
             </Grid>
