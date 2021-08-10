@@ -57,20 +57,57 @@ function Dashboard() {
   const [chartData, setChartData] = React.useState(
     {
       labels: [],
+      backgroundColor: 'blue',
       datasets: [
         {
-          label: ['Payment', 'Clicks', 'Conversion', 'Cr', 'Payout', 'Revenue'],
+          label: 'Payment',
           data: [],
           fill: false,          
-          borderColor: 'green'
+          borderColor: 'white',
+          lineTension: 0,
+        },
+        {
+          label: 'Clicks',
+          data: [],
+          fill: false,          
+          borderColor: 'lightblue',
+          lineTension: 0,
+        },
+        {
+          label: 'Conversion',
+          data: [],
+          fill: false,          
+          borderColor: 'green',
+          lineTension: 0,
+        },
+        {
+          label: 'Cr',
+          data: [],
+          fill: false,          
+          borderColor: 'yellow',
+          lineTension: 0,
+        },
+        {
+          label: 'Payout',
+          data: [],
+          fill: false,          
+          borderColor: 'red',
+          lineTension: 0,
+        },
+        {
+          label: 'Revenue',
+          data: [],
+          fill: false,          
+          borderColor: 'orange',
+          lineTension: 0,
         }
       ]
     }
   );
 
   const [date, setDate] = React.useState({
-    startDate: null,
-    endDate: null,
+    startDate: Date(Date() - 86400 * 30),
+    endDate: new Date(),
   });
 
   const [list, setList] = React.useState([]);
@@ -99,21 +136,120 @@ function Dashboard() {
         setChartData(
           {
             labels: Object.keys(Object.values(list)[0].data),
+            backgroundColor: 'white',
             datasets: [
               {
-                label: ['Payment', 'Clicks'],
-                data: [[1, 1], [2, 3]],
+                label: 'Payment',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].payment }) })[0],
+                lineTension: 0,
                 fill: false,          
-                borderColor: 'white'
+                borderColor: 'white',
+              },
+              {
+                label: 'Clicks',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalclicks }) })[0],
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'lightblue'
+              },
+              {
+                label: 'Conversion',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalconversion }) })[0],
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'green'
+              },
+              {
+                label: 'Cr',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalcr }) })[0],
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'yellow'
+              },
+              {
+                label: 'Payout',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalpayout }) })[0],
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'red'
+              },
+              {
+                label: 'Revenue',
+                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalrevenue }) })[0],
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'orange'
               }
             ]
           }
         )
     })
     .catch(err => {
-        alert('There has been a problem with your fetch operation: ' + err);
+      setChartData(
+        {
+          labels: [],
+          backgroundColor: 'white',
+          datasets: [
+            {
+              label: 'Payment',
+              data: null,
+              fill: false,          
+              borderColor: 'white'
+            },
+            {
+              label: 'Clicks',
+              data: null,
+              fill: false,          
+              borderColor: 'lightblue'
+            },
+            {
+              label: 'Conversion',
+              data: null,
+              fill: false,          
+              borderColor: 'green'
+            },
+            {
+              label: 'Cr',
+              data: null,
+              fill: false,          
+              borderColor: 'yellow'
+            },
+            {
+              label: 'Payout',
+              data: null,
+              fill: false,          
+              borderColor: 'red'
+            },
+            {
+              label: 'Revenue',
+              data: null,
+              fill: false,          
+              borderColor: 'orange'
+            }
+          ]
+        }
+      )
     });
 }
+
+const options = {
+  scales: {
+    yAxes: [
+      {
+        gridLines: {
+          color: "white"
+        }
+      }
+    ],
+    xAxes: [
+      {
+        gridLines: {
+          color: "white"
+        }
+      }
+    ]
+  }
+};
 
 const listedObj = Object.values(list);
 
@@ -164,7 +300,7 @@ const listedObj = Object.values(list);
                         display="flex"
                         flexWrap="wrap"
                       >
-<Grid item xs="auto">
+                      <Grid item xs="auto">
                       <Box
                         justifyContent="flex-end"
                         display="flex"
@@ -246,7 +382,7 @@ const listedObj = Object.values(list);
             </Card>
           </Grid>
         
-        <Grid container>
+        <Grid container xs={12}>
           <Grid
             item
             xs={12}
@@ -275,7 +411,7 @@ const listedObj = Object.values(list);
                         letterSpacing=".0625rem"
                         marginTop=".5rem!important"
                         className={classes.textUppercase}
-                      >zz
+                      >
                         <Box component="span" color={theme.palette.gray[400]}>
                           Overview
                         </Box>
@@ -286,7 +422,7 @@ const listedObj = Object.values(list);
                         marginBottom="0!important"
                       >
                         <Box component="span" color={theme.palette.white.main}>
-                          Analytics
+                          Analytics Trend
                         </Box>
                       </Box>
                     </Grid>
@@ -295,8 +431,8 @@ const listedObj = Object.values(list);
                 classes={{ root: classes.cardHeaderRoot }}
               ></CardHeader>
               <CardContent>
-                <Box position="relative" height="350px" width="100%">
-                  <Line data = {chartData}/>
+                <Box position="relative" height="450px" width="100%">
+                  <Line data = {chartData} options = {options} />
                 </Box>
               </CardContent>
             </Card>
