@@ -6,6 +6,7 @@ import { Line } from "react-chartjs-2";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -57,7 +58,7 @@ function Dashboard() {
 
   const [date, setDate] = React.useState({
     startDate: null,
-    endDate: null
+    endDate: null,
   });
 
   const [list, setList] = React.useState([]);
@@ -129,7 +130,7 @@ const listedObj = Object.values(list);
                         variant="h3"
                         marginBottom="0!important"
                       >
-                        Page visits
+                        Analytics
                       </Box>
                     </Grid>
                     <Grid item xs="auto">
@@ -185,135 +186,37 @@ const listedObj = Object.values(list);
                 }
                 classes={{ root: classes.cardHeaderRoot }}
               ></CardHeader>
-              <TableContainer>
-                <Box
-                  component={Table}
-                  alignItems="center"
-                  marginBottom="0!important"
-                >
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Date
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Payment
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Clicks
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Conversion
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        CR
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Payout
-                      </TableCell>
-                      <TableCell
-                        classes={{
-                          root:
-                            classes.tableCellRoot +
-                            " " +
-                            classes.tableCellRootHead,
-                        }}
-                      >
-                        Revenue
-                      </TableCell>
+                      <TableCell>Date</TableCell>
+                      <TableCell align="right">Payment</TableCell>
+                      <TableCell align="right">Clicks</TableCell>
+                      <TableCell align="right">Conversion</TableCell>
+                      <TableCell align="right">Cr</TableCell>
+                      <TableCell align="right">Payout</TableCell>
+                      <TableCell align="right">Revenue</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                      {listedObj.map(val => {
-                      <>
-                      {Object.entries(val).map((k, v) => {
+                    {Object.values(listedObj).map(row => (
+                      Object.entries(row.data).map((key, value) => (
                         <>
-                        <span>{console.log(k)}</span>
-                        <TableRow key={v.payment}>
-                          <TableCell
-                            classes={{
-                              root:
-                                classes.tableCellRoot +
-                                " " +
-                                classes.tableCellRootBodyHead,
-                            }}
-                            component="th"
-                            variant="head"
-                            scope="row"
-                            key={v.payment}
-                          >
-                            {v.payment}
-                          </TableCell>
-                          <TableCell classes={{ root: classes.tableCellRoot }}>
-                            {v.data}
-                          </TableCell>
-                          <TableCell classes={{ root: classes.tableCellRoot }}>
-                            {v.totalclicks}
-                          </TableCell>
-                          <Box
-                            component={TableCell}
-                            className={classes.tableCellRoot}
-                            marginBottom="-2px"
-                          >
-                            <Box
-                              component={ArrowUpward}
-                              width="1rem!important"
-                              height="1rem!important"
-                              marginRight="1rem"
-                              color={theme.palette.success.main}
-                            />
-                            46,53%
-                          </Box>
+                        <TableRow>
+                          <TableCell>{key[0]}</TableCell>
+                          <TableCell align="right">{key[1].payment}</TableCell>
+                          <TableCell align="right">{key[1].totalclicks}</TableCell>
+                          <TableCell align="right">{key[1].totalconversion}</TableCell>
+                          <TableCell align="right">{key[1].totalcr}</TableCell>
+                          <TableCell align="right">{key[1].totalpayout}</TableCell>
+                          <TableCell align="right">{key[1].totalrevenue}</TableCell>
                         </TableRow>
                         </>
-                      })}
-                       </>
-                       }
-                      )}
+                      ))
+                    ))}
                   </TableBody>
-                </Box>
+                </Table>
               </TableContainer>
             </Card>
           </Grid>
