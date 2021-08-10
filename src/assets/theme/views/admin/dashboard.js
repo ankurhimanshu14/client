@@ -2,17 +2,14 @@ import boxShadows from "../../box-shadow.js";
 
 const componentStyles = (theme) => ({
   cardRootBgGradient: {
-    background:
-      "linear-gradient(87deg," +
-      theme.palette.dark.main +
-      ",#1a174d)!important",
+    background: "white"
   },
   cardRoot: {
     boxShadow: boxShadows.boxShadow + "!important",
     border: "0!important",
   },
   cardHeaderRoot: {
-    backgroundColor: "initial!important",
+    backgroundColor: "white",
   },
   textUppercase: {
     textTransform: "uppercase",

@@ -63,14 +63,14 @@ function Dashboard() {
           label: 'Payment',
           data: [],
           fill: false,          
-          borderColor: 'white',
+          borderColor: 'black',
           lineTension: 0,
         },
         {
           label: 'Clicks',
           data: [],
           fill: false,          
-          borderColor: 'lightblue',
+          borderColor: 'blue',
           lineTension: 0,
         },
         {
@@ -135,47 +135,47 @@ function Dashboard() {
         setList({list: doc})
         setChartData(
           {
-            labels: Object.keys(Object.values(list)[0].data),
+            labels: Object.keys(doc.data),
             backgroundColor: 'white',
             datasets: [
               {
                 label: 'Payment',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].payment }) })[0],
+                data: Object.values(doc.data).map(row => {return row.payment}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'white',
               },
               {
                 label: 'Clicks',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalclicks }) })[0],
+                data: Object.values(doc.data).map(row => {return row.totalclicks}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'lightblue'
               },
               {
                 label: 'Conversion',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalconversion }) })[0],
+                data: Object.values(doc.data).map(row => {return row.totalconversion}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'green'
               },
               {
                 label: 'Cr',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalcr }) })[0],
+                data: Object.values(doc.data).map(row => {return row.totalcr}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'yellow'
               },
               {
                 label: 'Payout',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalpayout }) })[0],
+                data: Object.values(doc.data).map(row => {return row.totalpayout}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'red'
               },
               {
                 label: 'Revenue',
-                data: Object.values(listedObj).map(row => { return Object.entries(row.data).map((key, val) => { return key[1].totalrevenue }) })[0],
+                data: Object.values(doc.data).map(row => {return row.totalrevenue}),
                 lineTension: 0,
                 fill: false,          
                 borderColor: 'orange'
