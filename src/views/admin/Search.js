@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -27,7 +29,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import MoreVert from "@material-ui/icons/MoreVert";
 
 // core components
-import Header from "../../components/Headers/Header.js";
+import UserHeader from "../../components/Headers/UserHeader.js";
 
 import componentStyles from "../../assets/theme/views/admin/tables.js";
 
@@ -95,7 +97,7 @@ const Search = () => {
   };
   return (
     <>
-      <Header />
+      <UserHeader />
       {/* Page content */}
       <Container
         maxWidth={false}
@@ -106,13 +108,46 @@ const Search = () => {
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader
             className={classes.cardHeader}
-            title="Card Tables"
+            title="User"
             titleTypographyProps={{
               component: Box,
               marginBottom: "0!important",
               variant: "h3",
             }}
           ></CardHeader>
+          <Grid container xs={12}>
+          <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
+            <Box
+              justifyContent="flex-end"
+              display="flex"
+              flexWrap="wrap"
+            >
+            <form className={classes.textfieldContainer} noValidate>
+            <TextField
+            id="user"
+            name="user"
+            label="Username"
+            placeholder="Enter username here..."
+            type="text"
+            variant="outlined"
+            margin="10px"
+            // value={}
+            // onChange={}
+            className={classes.textField}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              margin="1rem!important"
+              // onClick={() => handleSubmit() }
+              classes={classes.buttonRootUnselected}
+            >
+              Submit
+            </Button>
+            </form>
+            </Box>
+            </Grid>
+            </Grid>
           <TableContainer>
             <Box
               component={Table}

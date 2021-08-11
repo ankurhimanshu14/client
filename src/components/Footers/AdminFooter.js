@@ -26,7 +26,7 @@ const Footer = () => {
           alignItems="center"
           className={classes.justifyContentCenter}
         >
-          <div className={classes.copyrightWrapper}>
+          {/* <div className={classes.copyrightWrapper}>
             © {new Date().getFullYear()}{" "}
             <a
               className={classes.copyrightLink}
@@ -36,7 +36,7 @@ const Footer = () => {
             >
               Creative Tim
             </a>
-          </div>
+          </div> */}
         </Box>
 
         <Grid
@@ -53,7 +53,7 @@ const Footer = () => {
             alignItems="center"
             className={classes.flexDirectionColumn}
           >
-            <ListItem
+            {/* <ListItem
               component="a"
               href="https://www.creative-tim.com?ref=adr-admin-footer"
               rel="noopener noreferrer"
@@ -99,7 +99,7 @@ const Footer = () => {
               }}
             >
               MIT License
-            </ListItem>
+            </ListItem> */}
           </Box>
         </Grid>
       </Grid>

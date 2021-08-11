@@ -6,7 +6,6 @@ import { Line } from "react-chartjs-2";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -21,15 +20,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import Pagination from "@material-ui/lab/Pagination";
-// @material-ui/icons components
-import MoreVert from "@material-ui/icons/MoreVert";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
 // core components
 import Header from "../../components/Headers/Header.js";
@@ -379,7 +370,7 @@ console.log(listedObj);
       <Container
         maxWidth={false}
         component={Box}
-        marginTop="-5rem"
+        marginTop="-9rem"
         classes={{ root: classes.containerRoot }}
       >
       <Card classes={{ root: classes.cardRoot }}>
@@ -392,46 +383,57 @@ console.log(listedObj);
               marginBottom: "0!important",
               variant: "h3",
             }}
-          ></CardHeader>
+          />
+          <Grid container xs={12}>
+          <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
             <Box
               justifyContent="flex-end"
               display="flex"
               flexWrap="wrap"
             >
+            <form className={classes.textfieldContainer} noValidate>
             <TextField
             id="startDate"
             name="startDate"
+            label="Start Date"
+            defaultValue="24-05-2021"
+            InputLabelProps={{
+              shrink: true,
+            }}
             type="date"
             variant="outlined"
             margin="10px"
             value={date.startDate}
             onChange={handleInputChange}
+            className={classes.textField}
             />
             <TextField
             id="endDate"
             name="endDate"
+            label="End Date"
+            InputLabelProps={{
+              shrink: true,
+            }}
             type="date"
             variant="outlined"
             margin="10px"
             value={date.endDate}
             onChange={handleInputChange}
+            className={classes.textField}
             />
-              <Button
-                variant="contained"
-                color="primary"
-                component={Box}
-                margin="1rem!important"
-                onClick={() => handleSubmit() }
-                classes={{
-                  root:
-                    activeNav === 1
-                      ? ""
-                      : classes.buttonRootUnselected,
-                }}
-              >
-                Submit
-              </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              margin="1rem!important"
+              onClick={() => handleSubmit() }
+              classes={classes.buttonRootUnselected}
+            >
+              Submit
+            </Button>
+            </form>
             </Box>
+            </Grid>
+            </Grid>
           <TableContainer>
             <Box
               component={Table}
@@ -619,53 +621,19 @@ console.log(listedObj);
           >
           <Pagination count={3} maxColumns={7} color="primary" variant="outlined" />
           </Box>
-        </Card>        
+        </Card>
+        <Card classes={{ root: classes.cardRoot }}>
+          <CardHeader
+            className={classes.cardHeader}
+            title="Analytics"
+            titleTypographyProps={{
+              component: Box,
+              marginTop: "3!important",
+              marginBottom: "0!important",
+              variant: "h3",
+            }}
+          ></CardHeader>
           <Grid container xs={12} marginTop="3rem">
-          <Grid
-            item
-            xs={12}
-            xl={12}
-            component={Box}
-            marginTop="3rem!important"
-            marginLeft="0.5rem!important"
-            marginBottom="3rem!important"
-            classes={{ root: classes.cardRoot }}
-          >
-            <Card classes={{ root: classes.cardRoot }}>
-              <CardHeader
-                subheader={
-                  <Grid
-                    container
-                    component={Box}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Grid item xs="auto">
-                      <Box
-                        component={Typography}
-                        variant="h6"
-                        letterSpacing=".0625rem"
-                        marginTop=".5rem!important"
-                        className={classes.textUppercase}
-                      >
-                        <Box component="span" color={theme.palette.gray[400]}>
-                          Overview
-                        </Box>
-                      </Box>
-                      <Box
-                        component={Typography}
-                        variant="h2"
-                        marginBottom="0!important"
-                      >
-                        <Box component="span" color={theme.palette.black.main}>
-                          Analytics Trend
-                        </Box>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                }
-                classes={{ root: classes.gridItemRoot }}
-              ></CardHeader>
               <CardContent>
                 <Box position="relative" height="800px">
                   <Line
@@ -674,9 +642,8 @@ console.log(listedObj);
                   />
                 </Box>
               </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+            </Grid>
+        </Card>     
       </Container>
     </>
   );

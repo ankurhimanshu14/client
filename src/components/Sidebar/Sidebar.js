@@ -168,7 +168,7 @@ export default function Sidebar({ routes, logo, dropdown, input }) {
                 aria-haspopup="true"
                 onClick={handleMenuOpen}
               />
-              {/* {logoObject} */}
+              {logoObject}
               {dropdown}
             </Container>
           </Toolbar>

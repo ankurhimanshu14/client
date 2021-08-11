@@ -4,7 +4,8 @@ const componentStyles = (theme) => ({
   },
   cardRoot: {
     border: "0!important",
-    width: "100%"
+    width: "100%",
+    marginTop: "3rem!important"
   },
   cardHeaderRoot: {
     backgroundColor: "white",
@@ -17,6 +18,16 @@ const componentStyles = (theme) => ({
       paddingLeft: "39px",
       paddingRight: "39px",
     },
+  },
+  textfieldContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '1rem'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
   },
   buttonRootUnselected: {
     background: theme.palette.white.main + "!important",

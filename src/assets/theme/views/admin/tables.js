@@ -21,6 +21,16 @@ const componentStyles = (theme) => ({
   cardHeader: {
     backgroundColor: "initial",
   },
+  textfieldContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '1rem'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
   cardActionsRoot: {
     paddingBottom: "1.5rem!important",
     paddingTop: "1.5rem!important",
@@ -37,6 +47,7 @@ const componentStyles = (theme) => ({
   },
   tableCellRoot: {
     verticalAlign: "middle",
+    alignText: 'right',
     paddingLeft: "1.5rem",
     paddingRight: "1.5rem",
     borderTop: "0",
