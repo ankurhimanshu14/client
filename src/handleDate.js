@@ -1,19 +1,12 @@
-function handleDate(initialDate) {
-    const pad = v => v.padStart(2, `0`);
-    
-    initialDate
-    .split(/[-/]/).map(pad).join("/");
-    const toFragments = dateString => initialDate
-    .split(/[-/]/).map(pad);
-    const dateTo_ddmmyyyy = ([date, month, year], divider = "/") => 
-    `${date}${divider}${month}${divider}${year}`;
-    const [date, month, year] = toFragments(initialDate);
-  
-  olddate = ( `${
-    [month, date, year].join('-') }` );
-  
-  
-  newdate = olddate.replace(/(^|-)0+/g, "$1"); // => "2-3"
-  
-  return newdate;
-  }
+function handleDate(n) {
+    if (n.length === 6) {
+      return n.replace(/(\d{1})(\d{1})(\d{4})/, "$1-$2-$3");
+    } else if (n.length === 8) {
+      return n.replace(/(\d{2})(\d{2})(\d{4})/, "$1-$2-$3");
+    } else {
+      return 
+    }
+}
+
+console.log(handleDate("182021"));
+console.log(handleDate("11122021"));

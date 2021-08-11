@@ -106,9 +106,121 @@ function Dashboard() {
   );
 
   const [date, setDate] = React.useState({
-    startDate: `${(new Date()).getMonth() + 1}-01-${(new Date()).getFullYear()}`,
-    endDate: `${(new Date()).getMonth() + 1}-${(new Date()).getDate()}-${(new Date()).getFullYear()}`,
+    startDate: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-1`,
+    endDate: `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate()-1}`
   });
+
+  React.useState(() => {
+    const requestOptions = {
+      credentials: 'include',
+      mode: 'cors',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(date)
+  };
+  
+    fetch('https://mcashapi.xyz/api/v1/filteranalytics', requestOptions)
+    .then(res => res.json())
+    .then(doc => {
+        setList({list: doc})
+        setChartData(
+          {
+            labels: Object.keys(doc.data),
+            backgroundColor: 'white',
+            datasets: [
+              {
+                label: 'Payment',
+                data: Object.values(doc.data).map(row => {return row.payment}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'black',
+              },
+              {
+                label: 'Clicks',
+                data: Object.values(doc.data).map(row => {return row.totalclicks}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'blue'
+              },
+              {
+                label: 'Conversion',
+                data: Object.values(doc.data).map(row => {return row.totalconversion}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'green'
+              },
+              {
+                label: 'Cr',
+                data: Object.values(doc.data).map(row => {return row.totalcr}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'yellow'
+              },
+              {
+                label: 'Payout',
+                data: Object.values(doc.data).map(row => {return row.totalpayout}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'red'
+              },
+              {
+                label: 'Revenue',
+                data: Object.values(doc.data).map(row => {return row.totalrevenue}),
+                lineTension: 0,
+                fill: false,          
+                borderColor: 'orange'
+              }
+            ]
+          }
+        )
+    })
+    .catch(err => {
+      setChartData(
+        {
+          labels: [],
+          backgroundColor: 'white',
+          datasets: [
+            {
+              label: 'Payment',
+              data: null,
+              fill: false,          
+              borderColor: 'white'
+            },
+            {
+              label: 'Clicks',
+              data: null,
+              fill: false,          
+              borderColor: 'lightblue'
+            },
+            {
+              label: 'Conversion',
+              data: null,
+              fill: false,          
+              borderColor: 'green'
+            },
+            {
+              label: 'Cr',
+              data: null,
+              fill: false,          
+              borderColor: 'yellow'
+            },
+            {
+              label: 'Payout',
+              data: null,
+              fill: false,          
+              borderColor: 'red'
+            },
+            {
+              label: 'Revenue',
+              data: null,
+              fill: false,          
+              borderColor: 'orange'
+            }
+          ]
+        }
+      )
+    });
+  })
 
   const [list, setList] = React.useState([]);
 
@@ -350,21 +462,21 @@ console.log(listedObj);
               <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                   <TableHead>
-                    <TableRow>
+                    <TableRow style={{backgroundColor: theme.palette.gray[400]}}>
                       <TableCell>Date</TableCell>
-                      <TableCell align="right">Payment</TableCell>
+                      <TableCell align="right">Payment({<span>&#8377;</span>})</TableCell>
                       <TableCell align="right">Clicks</TableCell>
                       <TableCell align="right">Conversion</TableCell>
-                      <TableCell align="right">Cr</TableCell>
-                      <TableCell align="right">Payout</TableCell>
-                      <TableCell align="right">Revenue</TableCell>
+                      <TableCell align="right">Cr(%)</TableCell>
+                      <TableCell align="right">Payout({<span>&#8377;</span>})</TableCell>
+                      <TableCell align="right">Revenue({<span>&#8377;</span>})</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {Object.values(listedObj).map(row => (
                       Object.entries(row.data).map((key, value) => (
                         <>
-                        <TableRow>
+                        <TableRow key={key[0]}>
                           <TableCell>{key[0]}</TableCell>
                           <TableCell align="right">{key[1].payment}</TableCell>
                           <TableCell align="right">{key[1].totalclicks}</TableCell>
@@ -433,7 +545,7 @@ console.log(listedObj);
                 classes={{ root: classes.gridItemRoot }}
               ></CardHeader>
               <CardContent>
-                <Box position="relative" height="500px">
+                <Box position="relative" height="800px">
                   <Line
                     data={chartData}
                     options={options}
