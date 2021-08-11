@@ -635,7 +635,7 @@ console.log(listedObj);
           ></CardHeader>
           <Grid container xs={12} marginTop="3rem">
               <CardContent>
-                <Box position="relative" height="800px">
+                <Box position="relative" height="auto">
                   <Line
                     data={chartData}
                     options={options}
