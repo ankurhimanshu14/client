@@ -13,6 +13,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Container from "@material-ui/core/Container";
+import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -21,7 +22,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Pagination from "@material-ui/lab/Pagination";
 // @material-ui/icons components
+import MoreVert from "@material-ui/icons/MoreVert";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 
@@ -51,6 +57,7 @@ var colors = {
 const useStyles = makeStyles(componentStyles);
 
 function Dashboard() {
+
   const classes = useStyles();
   const theme = useTheme();
   const [activeNav, setActiveNav] = React.useState(1);
@@ -372,128 +379,247 @@ console.log(listedObj);
       <Container
         maxWidth={false}
         component={Box}
-        marginTop="-9rem"
+        marginTop="-5rem"
         classes={{ root: classes.containerRoot }}
       >
-        <Grid container component={Box} marginTop="3rem">
-          <Grid
-            item
-            xs={12}
-            xl={12}
-            component={Box}
-            marginBottom="3rem!important"
-            classes={{ root: classes.gridItemRoot }}
-          >
-            <Card
-              classes={{
-                root: classes.cardRoot,
-              }}
+      <Card classes={{ root: classes.cardRoot }}>
+          <CardHeader
+            className={classes.cardHeader}
+            title="Analytics"
+            titleTypographyProps={{
+              component: Box,
+              marginTop: "3!important",
+              marginBottom: "0!important",
+              variant: "h3",
+            }}
+          ></CardHeader>
+            <Box
+              justifyContent="flex-end"
+              display="flex"
+              flexWrap="wrap"
             >
-              <CardHeader
-                subheader={
-                  <Grid
-                    container
-                    component={Box}
-                    alignItems="center"
-                    justifyContent="space-between"
+            <TextField
+            id="startDate"
+            name="startDate"
+            type="date"
+            variant="outlined"
+            margin="10px"
+            value={date.startDate}
+            onChange={handleInputChange}
+            />
+            <TextField
+            id="endDate"
+            name="endDate"
+            type="date"
+            variant="outlined"
+            margin="10px"
+            value={date.endDate}
+            onChange={handleInputChange}
+            />
+              <Button
+                variant="contained"
+                color="primary"
+                component={Box}
+                margin="1rem!important"
+                onClick={() => handleSubmit() }
+                classes={{
+                  root:
+                    activeNav === 1
+                      ? ""
+                      : classes.buttonRootUnselected,
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
+          <TableContainer>
+            <Box
+              component={Table}
+              alignItems="center"
+              marginBottom="0!important"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
                   >
-                    <Grid item xs="auto">
-                      <Box
-                        component={Typography}
-                        variant="h3"
-                        marginBottom="0!important"
-                      >
-                        Analytics
+                    Date
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Payment({<span>&#8377;</span>})
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Clicks
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Conversion
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Cr(%)
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Payout({<span>&#8377;</span>})
+                  </TableCell>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot + " " + classes.tableCellRootHead,
+                    }}
+                  >
+                    Revenue({<span>&#8377;</span>})
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+              {Object.values(listedObj).map(row => (
+                Object.entries(row.data).map((key, value) => (
+                  <>
+                <TableRow key={key[0]}>
+                  <TableCell
+                    classes={{
+                      root:
+                        classes.tableCellRoot +
+                        " " +
+                        classes.tableCellRootBodyHead,
+                    }}
+                    component="th"
+                    variant="head"
+                    scope="row"
+                  >
+                    <Box alignItems="center" display="flex">
+                      <Box display="flex" alignItems="flex-start">
+                        <Box fontSize=".875rem" component="span">
+                          {key[0]}
+                        </Box>
                       </Box>
-                    </Grid>
-                    <Grid item xs="auto">
+                    </Box>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    {key[1].payment}
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    <Box paddingTop=".35rem" paddingBottom=".35rem">
                       <Box
-                        justifyContent="flex-end"
-                        display="flex"
-                        flexWrap="wrap"
-                      >
-                      <Grid item xs="auto">
+                        marginRight="10px"
+                        component="i"
+                        width=".375rem"
+                        height=".375rem"
+                        borderRadius="50%"
+                        display="inline-block"
+                        className={
+                          classes.verticalAlignMiddle + " " + classes.bgWarning
+                        }
+                      ></Box>
+                      {key[1].totalclicks}
+                    </Box>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    <Box paddingTop=".35rem" paddingBottom=".35rem">
                       <Box
-                        justifyContent="flex-end"
-                        display="flex"
-                        flexWrap="wrap"
-                      >
-                      <TextField
-                      id="startDate"
-                      name="startDate"
-                      type="date"
-                      variant="outlined"
-                      margin="10px"
-                      value={date.startDate}
-                      onChange={handleInputChange}
-                      />
-                      <TextField
-                      id="endDate"
-                      name="endDate"
-                      type="date"
-                      variant="outlined"
-                      margin="10px"
-                      value={date.endDate}
-                      onChange={handleInputChange}
-                      />
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          component={Box}
-                          margin="1rem!important"
-                          onClick={() => handleSubmit() }
-                          classes={{
-                            root:
-                              activeNav === 1
-                                ? ""
-                                : classes.buttonRootUnselected,
-                          }}
-                        >
-                          Submit
-                        </Button>
-                      </Box>
-                    </Grid>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                }
-                classes={{ root: classes.cardHeaderRoot }}
-              ></CardHeader>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow style={{backgroundColor: theme.palette.gray[400]}}>
-                      <TableCell>Date</TableCell>
-                      <TableCell align="right">Payment({<span>&#8377;</span>})</TableCell>
-                      <TableCell align="right">Clicks</TableCell>
-                      <TableCell align="right">Conversion</TableCell>
-                      <TableCell align="right">Cr(%)</TableCell>
-                      <TableCell align="right">Payout({<span>&#8377;</span>})</TableCell>
-                      <TableCell align="right">Revenue({<span>&#8377;</span>})</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {Object.values(listedObj).map(row => (
-                      Object.entries(row.data).map((key, value) => (
-                        <>
-                        <TableRow key={key[0]}>
-                          <TableCell>{key[0]}</TableCell>
-                          <TableCell align="right">{key[1].payment}</TableCell>
-                          <TableCell align="right">{key[1].totalclicks}</TableCell>
-                          <TableCell align="right">{key[1].totalconversion}</TableCell>
-                          <TableCell align="right">{key[1].totalcr}</TableCell>
-                          <TableCell align="right">{key[1].totalpayout}</TableCell>
-                          <TableCell align="right">{key[1].totalrevenue}</TableCell>
-                        </TableRow>
-                        </>
+                        marginRight="10px"
+                        component="i"
+                        width=".375rem"
+                        height=".375rem"
+                        borderRadius="50%"
+                        display="inline-block"
+                        className={
+                          classes.verticalAlignMiddle + " " + classes.bgWarning
+                        }
+                      ></Box>
+                      {key[1].totalconversion}
+                    </Box>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    <Box paddingTop=".35rem" paddingBottom=".35rem">
+                      <Box
+                        marginRight="10px"
+                        component="i"
+                        width=".375rem"
+                        height=".375rem"
+                        borderRadius="50%"
+                        display="inline-block"
+                        className={
+                          classes.verticalAlignMiddle + " " + classes.bgWarning
+                        }
+                      ></Box>
+                      {key[1].totalcr}
+                    </Box>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    <Box paddingTop=".35rem" paddingBottom=".35rem">
+                      <Box
+                        marginRight="10px"
+                        component="i"
+                        width=".375rem"
+                        height=".375rem"
+                        borderRadius="50%"
+                        display="inline-block"
+                        className={
+                          classes.verticalAlignMiddle + " " + classes.bgWarning
+                        }
+                      ></Box>
+                      {key[1].totalpayout}
+                    </Box>
+                  </TableCell>
+                  <TableCell classes={{ root: classes.tableCellRoot }}>
+                    <Box paddingTop=".35rem" paddingBottom=".35rem">
+                      <Box
+                        marginRight="10px"
+                        component="i"
+                        width=".375rem"
+                        height=".375rem"
+                        borderRadius="50%"
+                        display="inline-block"
+                        className={
+                          classes.verticalAlignMiddle + " " + classes.bgWarning
+                        }
+                      ></Box>
+                      {key[1].totalrevenue}
+                    </Box>
+                  </TableCell>
+                  </TableRow>
+                </>
                       ))
                     ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Card>
-          </Grid>
-        
+              </TableBody>
+            </Box>
+          </TableContainer>
+          <Box
+            classes={{ root: classes.cardActionsRoot }}
+            component={CardActions}
+            justifyContent="flex-end"
+          >
+          <Pagination count={3} maxColumns={7} color="primary" variant="outlined" />
+          </Box>
+        </Card>        
           <Grid container xs={12} marginTop="3rem">
           <Grid
             item
@@ -501,15 +627,11 @@ console.log(listedObj);
             xl={12}
             component={Box}
             marginTop="3rem!important"
-            marginLeft="1rem!important"
+            marginLeft="0.5rem!important"
             marginBottom="3rem!important"
-            classes={{ root: classes.gridItemRoot }}
+            classes={{ root: classes.cardRoot }}
           >
-            <Card
-              classes={{
-                root: classes.cardRoot,
-              }}
-            >
+            <Card classes={{ root: classes.cardRoot }}>
               <CardHeader
                 subheader={
                   <Grid
@@ -554,7 +676,6 @@ console.log(listedObj);
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
         </Grid>
       </Container>
     </>
