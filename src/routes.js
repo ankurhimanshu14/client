@@ -33,8 +33,8 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/search",
-    name: "Search",
+    path: "/referDetails",
+    name: "Refer Details",
     icon: SearchSharpIcon,
     iconColor: "Error",
     component: Search,

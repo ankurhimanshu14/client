@@ -27,7 +27,7 @@ const UserHeader = () => {
         className={classes.wrapperBox}
         minHeight="600px"
         position="relative"
-      >
+      />
         <Box
           position="absolute"
           top="0"
@@ -36,7 +36,7 @@ const UserHeader = () => {
           height="100%"
           className={classes.overlayBox}
         />
-        <Container
+        {/* <Container
           display="flex"
           alignItems="center"
           maxWidth={false}
@@ -45,32 +45,10 @@ const UserHeader = () => {
         >
           <Grid container>
             <Grid item xs={12} md={10} lg={7}>
-              <Typography
-                variant="h1"
-                classes={{ root: classes.typographyRootH1 }}
-              >
-                Hello Jesse
-              </Typography>
-              <Box
-                component="p"
-                marginBottom="3rem"
-                color={theme.palette.white.main}
-                lineHeight="1.7"
-                fontSize="1rem"
-              >
-                This is your profile page. You can see the progress you've made
-                with your work and manage your projects or assigned tasks
-              </Box>
-              <Button
-                variant="contained"
-                classes={{ root: classes.buttonRoot }}
-              >
-                Edit profile
-              </Button>
             </Grid>
           </Grid>
-        </Container>
-      </Box>
+        </Container> */}
+      {/* </Box> */}
     </>
   );
 };
