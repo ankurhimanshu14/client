@@ -2,7 +2,6 @@ import React from "react";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 
 // core components
@@ -12,7 +11,6 @@ const useStyles = makeStyles(componentStyles);
 
 const UserHeader = () => {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <>
       <Box

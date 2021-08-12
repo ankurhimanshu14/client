@@ -26,6 +26,11 @@ const componentStyles = (theme) => ({
     flexWrap: 'wrap',
     margin: '1rem'
   },
+  buttonRootUnselected: {
+    background: theme.palette.white.main + "!important",
+    color: theme.palette.primary.main + "!important",
+    height: "1px"
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),

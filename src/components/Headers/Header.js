@@ -1,13 +1,10 @@
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 // @material-ui/icons components
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import GroupAdd from "@material-ui/icons/GroupAdd";
 import PaymentSharpIcon from '@material-ui/icons/PaymentSharp';
 import TouchAppSharpIcon from '@material-ui/icons/TouchAppSharp';
@@ -23,7 +20,6 @@ const useStyles = makeStyles(componentStyles);
 
 const Header = () => {
   const classes = useStyles();
-  const theme = useTheme();
   const [val, setVal] = React.useState({
     payment: 0,
     totalclicks: 0,

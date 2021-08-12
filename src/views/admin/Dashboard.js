@@ -4,7 +4,6 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
@@ -27,31 +26,11 @@ import Header from "../../components/Headers/Header.js";
 
 // import handleDate from '../../handleDate';
 
-const themeColors = require("../../assets/theme/colors.js").default;
-
-var colors = {
-  gray: themeColors.gray,
-  theme: {
-    default: themeColors.dark.main,
-    primary: themeColors.primary.main,
-    secondary: "#f4f5f7",
-    info: themeColors.info.main,
-    success: themeColors.success.main,
-    danger: themeColors.error.main,
-    warning: themeColors.warning.main,
-  },
-  black: themeColors.black.light,
-  white: themeColors.white.main,
-  transparent: themeColors.transparent.main,
-};
-
 const useStyles = makeStyles(componentStyles);
 
 function Dashboard() {
 
   const classes = useStyles();
-  const theme = useTheme();
-  const [activeNav, setActiveNav] = React.useState(1);
   const [chartData, setChartData] = React.useState(
     {
       labels: [],
