@@ -5,8 +5,6 @@ const componentStyles = (theme) => ({
     },
     backgroundSize: "cover",
     backgroundPosition: "center top",
-    backgroundImage:
-      "url(" + require("../../img/theme/profile-cover.jpg").default + ")",
   },
   overlayBox: {
     transition: "all .15s ease",

@@ -362,7 +362,7 @@ const options = {
 };
 
 const listedObj = Object.values(list);
-console.log(listedObj);
+
   return (
     <>
       <Header />

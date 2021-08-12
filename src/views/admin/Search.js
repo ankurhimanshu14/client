@@ -30,7 +30,12 @@ const useStyles = makeStyles(componentStyles);
 const Search = () => {
   const classes = useStyles();
 
-  const [refercode, setRefercode] = React.useState(null);
+  const [data, setData] = React.useState({
+    refercode: null,
+    totalrefer: null,
+    transactionid: null,
+    uid: null
+  });
   const [list, setList] = React.useState([])
 
   React.useEffect(() => {
@@ -52,7 +57,7 @@ const Search = () => {
 
   const handleInputChange = e => {
     e.preventDefault();
-    setRefercode([e.target.name] = e.target.value)
+    setData({...data, [e.target.name]: e.target.value})
   };
 
   const handleSubmit = () => {
@@ -61,7 +66,7 @@ const Search = () => {
       mode: 'cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({refercode})
+      body: JSON.stringify(data)
   };
   
   fetch('https://mcashapi.xyz/api/v1/referfetch', requestOptions)
@@ -73,7 +78,6 @@ const Search = () => {
 }
 
 const listedObj = Object.values(list);
-
   return (
     <>
       <UserHeader />
@@ -87,7 +91,7 @@ const listedObj = Object.values(list);
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader
             className={classes.cardHeader}
-            title="User"
+            title="Refer"
             titleTypographyProps={{
               component: Box,
               marginBottom: "0!important",
@@ -105,12 +109,12 @@ const listedObj = Object.values(list);
             <TextField
             id="refercode"
             name="refercode"
-            labl="Refer Code"
+            label="Refer Code"
             placeholder="Enter refer code here..."
             type="text"
             variant="outlined"
             margin="10px"
-            value={refercode}
+            value={data.refercode}
             onChange={handleInputChange}
             className={classes.textField}
             />
@@ -161,10 +165,11 @@ const listedObj = Object.values(list);
                   </TableCell>
                 </TableRow>
               </TableHead>
-              {/* <TableBody>
-                {Object.values(listedObj[0])[1].map((key, values) => (
+              <TableBody>
+                {Object.values(listedObj).map(row => (
+                  Object.entries(row.data).map((key, values) => (
                   <>
-                  <TableRow key={key}>
+                  <TableRow key={key[1].transactionid}>
                     <TableCell
                       classes={{
                         root:
@@ -179,21 +184,22 @@ const listedObj = Object.values(list);
                       <Box alignItems="center" display="flex">
                         <Box display="flex" alignItems="flex-start">
                           <Box fontSize=".875rem" component="span">
-                            {key}
+                            {key[1].refercode}
                           </Box>
                         </Box>
                       </Box>
                     </TableCell>
                     <TableCell classes={{ root: classes.tableCellRoot }}>
-                      {values.totalrefer}
+                      {key[1].totalrefer}
                     </TableCell>
                     <TableCell classes={{ root: classes.tableCellRoot }}>
-                      values.uid
+                      {key[1].uid}
                     </TableCell>
                   </TableRow>
                   </>
+                  ))
                 ))}
-              </TableBody> */}
+              </TableBody>
             </Box>
           </TableContainer>
           <Box

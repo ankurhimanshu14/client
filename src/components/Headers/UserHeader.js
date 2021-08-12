@@ -4,10 +4,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
 // core components
 import componentStyles from "../../assets/theme/components/user-header.js";
@@ -21,11 +17,11 @@ const UserHeader = () => {
     <>
       <Box
         paddingTop="3rem"
-        paddingBottom="8rem"
+        paddingBottom="1rem"
         alignItems="center"
         display="flex"
         className={classes.wrapperBox}
-        minHeight="600px"
+        minHeight="100px"
         position="relative"
       />
         <Box
