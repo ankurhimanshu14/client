@@ -42,7 +42,6 @@ export default function Sidebar({ routes, logo, dropdown, input }) {
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      console.log(prop);
       if (prop.divider) {
         return <Divider key={key} classes={{ root: classes.divider }} />;
       } else if (prop.title) {

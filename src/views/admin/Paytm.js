@@ -45,7 +45,7 @@ const Search = () => {
   });
   const [list, setList] = React.useState([])
 
-  const [search, setSearch] = React.useState(null);
+  // const [search, setSearch] = React.useState(null);
 
   const [radio, setRadio] = React.useState('none');
 
@@ -86,9 +86,15 @@ const Search = () => {
     fetch('https://mcashapi.xyz/api/v1/paytmredeemfetch', requestOptions)
       .then(res => res.json())
       .then(doc => {
-        setList({ list: doc })
+        if (doc.data) {
+          setList({ list: doc })
+        } else {
+          alert("Value not found");
+        }
       })
-      .catch(err => alert(err))
+      .catch(err => {
+        alert(err);
+      })
   }
 
   const BlueRadio = withStyles({
@@ -103,7 +109,7 @@ const Search = () => {
 
   const handleChange = (event) => {
     setRadio(event.target.value);
-    setSearch(radio);
+    // setSearch(radio);
   };
 
   const listedObj = Object.values(list);
