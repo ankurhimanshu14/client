@@ -85,7 +85,7 @@ const listedObj = Object.values(list);
       <Container
         maxWidth={false}
         component={Box}
-        marginTop="3rem"
+        marginTop="-24rem"
         classes={{ root: classes.containerRoot }}
       >
         <Card classes={{ root: classes.cardRoot }}>
