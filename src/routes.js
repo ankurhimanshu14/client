@@ -17,12 +17,6 @@ import VpnKey from "@material-ui/icons/VpnKey";
 import AccountBalanceSharpIcon from '@material-ui/icons/AccountBalanceSharp';
 
 var routes = [
-  // {
-  //   href: "#pablo",
-  //   name: "Upgrade to pro",
-  //   icon: FlashOn,
-  //   upgradeToPro: true,
-  // },
   {
     path: "/index",
     name: "Dashboard",
@@ -65,14 +59,6 @@ var routes = [
     layout: "/auth",
   },
   {
-    path: "/login",
-    name: "Login",
-    icon: VpnKey,
-    iconColor: "Info",
-    component: Login,
-    layout: "/auth",
-  },
-  {
     path: "/register",
     name: "Register",
     icon: AccountCircle,
@@ -83,26 +69,5 @@ var routes = [
   {
     divider: true,
   },
-  // {
-  //   title: "Documentation",
-  // },
-  // {
-  //   href:
-  //     "https://www.creative-tim.com/learning-lab/material-ui/overview/argon-dashboard?ref=admui-admin-sidebar",
-  //   name: "Getting started",
-  //   icon: FlashOn,
-  // },
-  // {
-  //   href:
-  //     "https://www.creative-tim.com/learning-lab/material-ui/colors/argon-dashboard?ref=admui-admin-sidebar",
-  //   name: "Foundation",
-  //   icon: Palette,
-  // },
-  // {
-  //   href:
-  //     "https://www.creative-tim.com/learning-lab/material-ui/alerts/argon-dashboard?ref=admui-admin-sidebar",
-  //   name: "Components",
-  //   icon: Dns,
-  // },
 ];
 export default routes;

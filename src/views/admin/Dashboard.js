@@ -483,7 +483,7 @@ const listedObj = Object.values(list);
               {Object.values(listedObj).map(row => (
                 Object.entries(row.data).map((key, value) => (
                   <>
-                <TableRow key={key[0]}>
+                <TableRow hover key={key[0]}>
                   <TableCell
                     classes={{
                       root:
