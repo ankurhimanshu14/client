@@ -17,15 +17,10 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { blue, blueGrey } from '@material-ui/core/colors'
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-// @material-ui/lab components
-import Pagination from "@material-ui/lab/Pagination";
-// @material-ui/icons components
+import { blue } from '@material-ui/core/colors'
+import TablePagination from '@material-ui/core/TablePagination';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
@@ -36,16 +31,30 @@ const useStyles = makeStyles(componentStyles);
 
 const Search = () => {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };  
 
   const [data, setData] = React.useState({
-    paytmnumber: null,
+    date: null,
     refercode: null,
-    transactionid: null,
-    uid: null
+    paytmnumber: null,
+    amount: null,
+    totalotheroffer: null,
+    totalredeem: null,
+    totalsurvey: null,
+    totaltaskoffer: null,
+    uid: null,
   });
   const [list, setList] = React.useState([])
-
-  // const [search, setSearch] = React.useState(null);
 
   const [radio, setRadio] = React.useState('none');
 
@@ -109,14 +118,33 @@ const Search = () => {
 
   const handleChange = (event) => {
     setRadio(event.target.value);
-    // setSearch(radio);
   };
 
-  const listedObj = Object.values(list);
+  const columns = [
+    { id: 'date', label: 'Date' },
+    { id: 'refercode', label: 'Refer Code' },
+    { id: 'paytmnumber', label: 'PayTM Number' },
+    { id: 'amount', label: 'Amount'},
+    { id: 'totalotheroffer', label: 'Total Other Offer' },
+    { id: 'totalredeem', label: 'Total Redeem' },
+    { id: 'totalsurvey', label: 'Total Survey' },
+    { id: 'totaltaskoffer', label: 'Total Task Offer' },
+    { id: 'uid', label: 'User ID'}
+  ]
+
+  function createData(l) {
+    const listedObj = Object.values(l);
+    return Object.values(listedObj).map(row => Object.entries(row.data).map((key, val) => {return key[1]}))
+  }
+
+  const rows = createData(list);
+
+  let rowslength;
+  rows.forEach(val => {rowslength = val.length})
+
   return (
     <>
       <UserHeader />
-      {/* Page content */}
       <Container
         maxWidth={false}
         component={Box}
@@ -189,67 +217,53 @@ const Search = () => {
               marginBottom="0!important"
             >
               <TableHead>
-                <TableRow>
-                  <TableCell
-                    classes={{
-                      root:
-                        classes.tableCellRoot + " " + classes.tableCellRootHead,
-                    }}
-                  >
-                    Paytm Number
-                  </TableCell>
-                  <TableCell
-                    classes={{
-                      root:
-                        classes.tableCellRoot + " " + classes.tableCellRootHead,
-                    }}
-                  >
-                    Refer Code
-                  </TableCell>
-                  <TableCell
-                    classes={{
-                      root:
-                        classes.tableCellRoot + " " + classes.tableCellRootHead,
-                    }}
-                  >
-                    User ID
-                  </TableCell>
-                </TableRow>
+              <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
               </TableHead>
               <TableBody>
-                {Object.values(listedObj).map(row => (
-                  Object.entries(row.data).map((key, values) => (
-                    <>
-                      <TableRow key={key[1].transactionid}>
-                        <TableCell
-                          classes={{
-                            root:
-                              classes.tableCellRoot +
-                              " " +
-                              classes.tableCellRootBodyHead,
-                          }}
-                          component="th"
-                          variant="head"
-                          scope="row"
-                        >
-                          <Box alignItems="center" display="flex">
-                            <Box display="flex" alignItems="flex-start">
-                              <Box fontSize=".875rem" component="span">
-                                {key[1].paytmnumber}
-                              </Box>
-                            </Box>
-                          </Box>
-                        </TableCell>
-                        <TableCell classes={{ root: classes.tableCellRoot }}>
-                          {key[1].refercode}
-                        </TableCell>
-                        <TableCell classes={{ root: classes.tableCellRoot }}>
-                          {key[1].uid}
-                        </TableCell>
-                      </TableRow>
-                    </>
-                  ))
-                ))}
+              {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
+                <>
+                <TableRow hover key={row.refercode}>
+                  <TableCell>
+                    {row.date}
+                  </TableCell>
+                  <TableCell>
+                    {row.refercode}
+                  </TableCell>
+                  <TableCell>
+                    {row.paytmnumber}
+                  </TableCell>
+                  <TableCell>
+                    {row.amount}
+                  </TableCell>
+                  <TableCell>
+                    {row.totalotheroffer}
+                  </TableCell>
+                  <TableCell>
+                    {row.totalredeem}
+                  </TableCell>
+                  <TableCell>
+                    {row.totalsurvey}
+                  </TableCell>
+                  <TableCell>
+                    {row.totaltaskoffer}
+                  </TableCell>
+                  <TableCell>
+                    {row.uid}
+                  </TableCell>
+                </TableRow>
+                </>
+              ))
+              ))}
               </TableBody>
             </Box>
           </TableContainer>
@@ -258,7 +272,17 @@ const Search = () => {
             component={CardActions}
             justifyContent="flex-end"
           >
-            <Pagination rowLength={100} maxColumns={5} count={3} color="primary" variant="outlined" />
+          <TablePagination
+            rowsPerPageOptions={false}
+            component="div"
+            count={rowslength}
+            backgroundColor="primary"
+            variant="outlined"
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
           </Box>
         </Card>
       </Container>
