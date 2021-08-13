@@ -123,12 +123,12 @@ const Search = () => {
   const columns = [
     { id: 'date', label: 'Date' },
     { id: 'refercode', label: 'Refer Code' },
-    { id: 'paytmnumber', label: 'PayTM Number' },
-    { id: 'amount', label: 'Amount'},
-    { id: 'totalotheroffer', label: 'Total Other Offer' },
-    { id: 'totalredeem', label: 'Total Redeem' },
-    { id: 'totalsurvey', label: 'Total Survey' },
-    { id: 'totaltaskoffer', label: 'Total Task Offer' },
+    { id: 'paytmnumber', label: 'PayTM Number', align: "right" },
+    { id: 'amount', label: 'Amount', align: "right" },
+    { id: 'totalotheroffer', label: 'Total Other Offer', align: "right" },
+    { id: 'totalredeem', label: 'Total Redeem', align: "right" },
+    { id: 'totalsurvey', label: 'Total Survey', align: "right" },
+    { id: 'totaltaskoffer', label: 'Total Task Offer', align: "right" },
     { id: 'uid', label: 'User ID'}
   ]
 
@@ -154,7 +154,7 @@ const Search = () => {
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader
             className={classes.cardHeader}
-            title="Refer"
+            title="PayTM Analytics"
             titleTypographyProps={{
               component: Box,
               marginBottom: "0!important",
@@ -239,22 +239,22 @@ const Search = () => {
                   <TableCell>
                     {row.refercode}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.paytmnumber}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.amount}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.totalotheroffer}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.totalredeem}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.totalsurvey}
                   </TableCell>
-                  <TableCell>
+                  <TableCell align="right">
                     {row.totaltaskoffer}
                   </TableCell>
                   <TableCell>
