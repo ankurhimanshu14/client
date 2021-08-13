@@ -1,6 +1,7 @@
 import React from "react";
 
 // @material-ui/core components
+import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
@@ -21,6 +22,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors'
 import TablePagination from '@material-ui/core/TablePagination';
+import Checkbox from '@material-ui/core/Checkbox';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
@@ -29,7 +31,7 @@ import componentStyles from "../../assets/theme/views/admin/tables.js";
 
 const useStyles = makeStyles(componentStyles);
 
-const Search = () => {
+const Search = (props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -142,6 +144,24 @@ const Search = () => {
   let rowslength;
   rows.forEach(val => {rowslength = val.length})
 
+  // const[checked, setChecked] = React.useState({
+  //   status: false
+  // });
+  // const[checklist, setChecklist] = React.useState({
+  //   selected: []
+  // });
+
+  // const handleCheck = (e) => {
+  //   setChecked({...checked, [e.target.name]: e.target.checked});
+  //   // setChecklist(checklist.selected.push(e.target.value));
+  // }
+
+  // console.log(checklist);
+
+  // const submitDelete = () => {
+  //   console.log(checklist);
+  // }
+
   return (
     <>
       <UserHeader />
@@ -219,6 +239,7 @@ const Search = () => {
               <TableHead>
               <TableRow>
               {columns.map((column) => (
+                <>
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -226,7 +247,11 @@ const Search = () => {
                 >
                   {column.label}
                 </TableCell>
+              </>
               ))}
+              {/* <TableCell>
+                  Select
+              </TableCell> */}
             </TableRow>
               </TableHead>
               <TableBody>
@@ -260,6 +285,21 @@ const Search = () => {
                   <TableCell>
                     {row.uid}
                   </TableCell>
+                  {/* <TableCell>
+                  <Checkbox
+                    className={classes.root}
+                    disableRipple
+                    color="default"
+                    checked={checked}
+                    onChange={handleCheck}
+                    id={row.refercode}
+                    value={checked.status}
+                    checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                    icon={<span className={classes.icon} />}
+                    // inputProps={{ 'aria-label': 'decorative checkbox' }}
+                    {...props}
+                  />
+                  </TableCell> */}
                 </TableRow>
                 </>
               ))
