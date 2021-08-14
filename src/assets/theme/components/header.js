@@ -1,12 +1,15 @@
+
 const componentStyles = (theme) => ({
   header: {
     position: "relative",
     background:
       "linear-gradient(87deg," + theme.palette.info.main + ",#1171ef)",
     paddingBottom: "8rem",
-    paddingTop: "3rem",
+    paddingTop: "100rem",
     [theme.breakpoints.up("md")]: {
       paddingTop: "8rem",
+      marginLeft: "-12rem",
+      marginTop: '-3rem'
     },
   },
   containerRoot: {

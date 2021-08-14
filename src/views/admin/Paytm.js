@@ -312,7 +312,7 @@ const Search = (props) => {
             component={CardActions}
             justifyContent="flex-end"
           >
-          <TablePagination
+          {(rows.length) ? <TablePagination
             rowsPerPageOptions={false}
             component="div"
             count={rowslength}
@@ -322,7 +322,7 @@ const Search = (props) => {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          /> : null}
           </Box>
         </Card>
       </Container>

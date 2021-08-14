@@ -20,7 +20,7 @@ function CardStats({ subtitle, title, footer, icon, color }) {
   const theme = useTheme();
   return (
     <>
-      <Card classes={{ root: classes.cardRoot }} elevation={0}>
+      <Card classes={{ root: classes.cardRoot }} elevation={3}>
         <CardContent classes={{ root: classes.cardContentRoot }}>
           <Grid container component={Box} justifyContent="space-between">
             <Grid item xs="auto">

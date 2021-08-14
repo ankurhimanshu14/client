@@ -59,7 +59,7 @@ const Header = () => {
           classes={{ root: classes.containerRoot }}
         >
           <div>
-            <Grid container>
+            <Grid container style={{marginLeft: "12rem!important"}}>
               <Grid item xl={4} lg={6} xs={12}>
                 <CardStats
                   subtitle="Payment"

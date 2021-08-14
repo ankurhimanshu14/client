@@ -9,8 +9,9 @@ const componentStyles = (theme) => ({
   overlayBox: {
     transition: "all .15s ease",
     opacity: ".9",
-    background:
-      "linear-gradient(87deg," + theme.palette.info.main + ",#1171ef)",
+    background: "linear-gradient(87deg," + theme.palette.info.main + ",#1171ef)",
+    marginLeft: "-12rem",
+    marginTop: "-3rem"
   },
   containerRoot: {
     zIndex: 1,

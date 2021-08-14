@@ -24,6 +24,32 @@ var routes = [
     iconColor: "Primary",
     component: Dashboard,
     layout: "/admin",
+    item: [
+      {
+        path: "/index",
+        name: "Dashboard",
+        icon: Tv,
+        iconColor: "Primary",
+        component: Dashboard,
+        layout: "/admin",
+      },
+      {
+        path: "/refer-details",
+        name: "Refer Details",
+        icon: SearchSharpIcon,
+        iconColor: "Error",
+        component: Search,
+        layout: "/admin",
+      },
+      {
+        path: "/paytm",
+        name: "Paytm",
+        icon: AccountBalanceSharpIcon,
+        iconColor: "Error",
+        component: Paytm,
+        layout: "/admin",
+      },
+    ]
   },
   {
     path: "/refer-details",
@@ -32,6 +58,32 @@ var routes = [
     iconColor: "Error",
     component: Search,
     layout: "/admin",
+    item: [
+      {
+        path: "/index",
+        name: "Dashboard",
+        icon: Tv,
+        iconColor: "Primary",
+        component: Dashboard,
+        layout: "/admin",
+      },
+      {
+        path: "/refer-details",
+        name: "Refer Details",
+        icon: SearchSharpIcon,
+        iconColor: "Error",
+        component: Search,
+        layout: "/admin",
+      },
+      {
+        path: "/paytm",
+        name: "Paytm",
+        icon: AccountBalanceSharpIcon,
+        iconColor: "Error",
+        component: Paytm,
+        layout: "/admin",
+      },
+    ]
   },
   {
     path: "/paytm",
