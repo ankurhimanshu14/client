@@ -18,6 +18,7 @@ import AccountBalanceSharpIcon from '@material-ui/icons/AccountBalanceSharp';
 
 var routes = [
   {
+    id: 'dashboard',
     path: "/index",
     name: "Dashboard",
     icon: Tv,
@@ -26,32 +27,27 @@ var routes = [
     layout: "/admin",
     item: [
       {
-        path: "/index",
-        name: "Dashboard",
-        icon: Tv,
-        iconColor: "Primary",
-        component: Dashboard,
+        id: 'user-profile',
+        path: "/user-profile",
+        name: "User Profile",
+        icon: Person,
+        iconColor: "WarningLight",
+        component: Profile,
         layout: "/admin",
       },
       {
-        path: "/refer-details",
-        name: "Refer Details",
-        icon: SearchSharpIcon,
-        iconColor: "Error",
-        component: Search,
-        layout: "/admin",
-      },
-      {
-        path: "/paytm",
-        name: "Paytm",
-        icon: AccountBalanceSharpIcon,
-        iconColor: "Error",
-        component: Paytm,
-        layout: "/admin",
+        id: 'login',
+        path: "/login",
+        name: "Login",
+        icon: VpnKey,
+        iconColor: "Info",
+        component: Login,
+        layout: "/auth"
       },
     ]
   },
   {
+    id: 'refer-details',
     path: "/refer-details",
     name: "Refer Details",
     icon: SearchSharpIcon,
@@ -60,7 +56,8 @@ var routes = [
     layout: "/admin",
     item: [
       {
-        path: "/index",
+        id: 'subdashboard2',
+        path: "/index2",
         name: "Dashboard",
         icon: Tv,
         iconColor: "Primary",
@@ -68,7 +65,8 @@ var routes = [
         layout: "/admin",
       },
       {
-        path: "/refer-details",
+        id: 'subreferdetails2',
+        path: "/refer-details2",
         name: "Refer Details",
         icon: SearchSharpIcon,
         iconColor: "Error",
@@ -76,7 +74,8 @@ var routes = [
         layout: "/admin",
       },
       {
-        path: "/paytm",
+        id: 'subpaytm2',
+        path: "/paytm2",
         name: "Paytm",
         icon: AccountBalanceSharpIcon,
         iconColor: "Error",
@@ -86,40 +85,44 @@ var routes = [
     ]
   },
   {
+    id: 'paytm',
     path: "/paytm",
     name: "Paytm",
     icon: AccountBalanceSharpIcon,
     iconColor: "Error",
     component: Paytm,
     layout: "/admin",
+    item:[]
   },
   {
+    id: 'user-profile',
     path: "/user-profile",
     name: "User Profile",
     icon: Person,
     iconColor: "WarningLight",
     component: Profile,
     layout: "/admin",
-    
+    item: []
   },
   {
+    id: 'login',
     path: "/login",
     name: "Login",
     icon: VpnKey,
     iconColor: "Info",
     component: Login,
     layout: "/auth",
+    item: []
   },
   {
+    id: 'register',
     path: "/register",
     name: "Register",
     icon: AccountCircle,
     iconColor: "ErrorLight",
     component: Register,
     layout: "/auth",
-  },
-  {
-    divider: true,
-  },
+    item:[]
+  }
 ];
 export default routes;

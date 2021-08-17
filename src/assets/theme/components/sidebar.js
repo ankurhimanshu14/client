@@ -68,21 +68,18 @@ const componentStyles = (theme) => ({
     display: "flex",
     fontSize: ".9rem",
     color: theme.palette.sidebarLinks.main,
-    padding: ".65rem 1.5rem !important",
+    padding: ".1rem 1.5rem !important",
     "&:hover": {
       color: theme.palette.sidebarLinks.dark,
     },
   },
-  listItemRootUpgradeToPro: {
-    [theme.breakpoints.up("md")]: {
-      position: "absolute",
-      bottom: "10px",
-    },
-    "&,&:hover": {
-      background: theme.palette.gray[100] + "!important",
-    },
-    "&:before": {
-      display: "none",
+  sublistItemRoot: {
+    display: "flex",
+    fontSize: ".9rem",
+    color: theme.palette.sidebarLinks.main,
+    padding: ".3rem 1.5rem !important",
+    "&:hover": {
+      color: theme.palette.sidebarLinks.dark,
     },
   },
   listItemSelected: {

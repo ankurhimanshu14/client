@@ -8,7 +8,6 @@ const componentStyles = (theme) => ({
     paddingTop: "100rem",
     [theme.breakpoints.up("md")]: {
       paddingTop: "8rem",
-      marginLeft: "-12rem",
       marginTop: '-3rem'
     },
   },

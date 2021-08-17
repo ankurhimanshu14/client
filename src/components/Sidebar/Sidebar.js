@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,19 +6,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Container from "@material-ui/core/Container";
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useLocation, Link } from "react-router-dom";
 // @material-ui/core components
 import Box from "@material-ui/core/Box";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons components
-
-import NavbarDropdown from "../Dropdowns/NavbarDropdown.js";
 
 import routes from '../../routes';
 
@@ -33,13 +28,11 @@ export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleClick = item => {
+    setOpen( prevState => ( 
+      { [ item ]: !prevState[ item ] } 
+    ) )
+  }
 
   return (
     <div className={classes.root}>
@@ -50,9 +43,7 @@ export default function Sidebar() {
         elevation={0}
         classes={{ root: classes.appBarRoot }}
         position="fixed"
-        className={clsx(classes.appBarRoot, classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
+        className={classes.appBarRoot}
       >
         <Toolbar disableGutters>
           <Container
@@ -72,11 +63,8 @@ export default function Sidebar() {
                 color="inherit"
                 backgroundColor="primary"
                 aria-label="open drawer"
-                onClick={handleDrawerOpen}
                 edge="start"
-                className={clsx(classes.menuButton, {
-                  [classes.hide]: open,
-                })}
+                className={classes.menuButton}
               >
                 <MenuIcon />
               </IconButton>
@@ -87,82 +75,71 @@ export default function Sidebar() {
       </AppBar>
       <Drawer
         variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
+        className={classes.drawer}
       >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            { open ? (theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />) : null }
-          </IconButton>
-        </div>
-        <Divider />
         <List classes={{ root: classes.listRoot }}>
             {routes.map((prop, key) => {
               let textContent = (
                 <>
+                  <ListItem
+                    key={key}
+                    component={Link}
+                    to={prop.layout + prop.path}
+                    classes={{
+                      root: classes.listItemRoot,
+                    }}
+                    style={{backgroundColor: 'unset'}}
+                    selected={location.pathname === prop.layout + prop.path}
+                    onClick = {() => handleClick(prop.id)}
+                  >
                   <Box minWidth="2.25rem" display="flex" alignItems="center">
-                    {typeof prop.icon === "string" ? (
-                      <Box
-                        component="i"
-                        className={prop.icon + " " + classes["text" + prop.iconColor]}
-                      />
-                    ) : null}
-                    {typeof prop.icon === "object" ? (
                       <Box
                         component={prop.icon}
                         width="1.25rem!important"
                         height="1.25rem!important"
                         className={classes["text" + prop.iconColor]}
                       />
-                    ) : null}
                   </Box>
-                  {prop.name}
+                    {prop.name}
+                  </ListItem>
                 </>
               );
-              if (prop.href) {
                 return (
+                  <>
+                  <List>
                   <ListItem
-                    key={key}
-                    component={"a"}
-                    href={prop.href}
-                    onClick={handleDrawerClose}
-                    classes={{
-                      root: classes.listItemRoot,
-                      selected: classes.listItemSelected,
-                    }}
-                  >
-                    {textContent}
-                  </ListItem>
-                );
-              } else {
-                return (
-                  <ListItem
-                    key={key}
+                    key={prop.id}
                     component={Link}
-                    onClick={handleDrawerClose}
+                    size="small"
                     to={prop.layout + prop.path}
                     classes={{
                       root: classes.listItemRoot,
                       selected: classes.listItemSelected,
                     }}
-                    selected={
-                      location.pathname === prop.layout + prop.path ||
-                      prop.upgradeToPro === true
-                    }
+                    selected={location.pathname === prop.layout + prop.path}
                   >
                     {textContent}
                   </ListItem>
+                    <Collapse in={open[prop.id]} timeout="auto" unmountOnExit>
+                    {prop.item.map((p, k) => (
+                      <ListItem
+                      key={prop.id}
+                      component={Link}
+                      to={p.layout + p.path}
+                      classes={{
+                        root: classes.sublistItemRoot,
+                        selected: classes.listItemSelected,
+                      }}
+                      selected={location.pathname === p.layout + p.path}>
+                        {p.name}
+                      </ListItem>
+                    ))}
+                    </Collapse>
+                    </List>
+                  </>
                 );
               }
-            })}
+            )}
         </List>
       </Drawer>
       <main className={classes.content}>
