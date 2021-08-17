@@ -16,8 +16,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-// @material-ui/lab components
-import Pagination from "@material-ui/lab/Pagination";
+import TablePagination from "@material-ui/core/TablePagination";
 // @material-ui/icons components
 
 // core components
@@ -69,15 +68,36 @@ const Search = () => {
       body: JSON.stringify(data)
   };
   
-  fetch('https://mcashapi.xyz/api/v1/referfetch', requestOptions)
-  .then(res => res.json())
-  .then(doc => {
-    setList({list: doc})
-  })
-  .catch(err => alert(err))
-}
+    fetch('https://mcashapi.xyz/api/v1/referfetch', requestOptions)
+    .then(res => res.json())
+    .then(doc => {
+      setList({list: doc})
+    })
+    .catch(err => alert(err))
+  }
 
-const listedObj = Object.values(list);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  }; 
+
+  function createData(l) {
+    const listedObj = Object.values(l);
+    return Object.values(listedObj).map(rows => {return Object.values(rows.data)})
+  }
+
+  const rows = createData(list);
+  let rowslength = 0;
+
+  rows.forEach(val => {rowslength = val.length})
+
   return (
     <>
       <UserHeader />
@@ -166,10 +186,9 @@ const listedObj = Object.values(list);
                 </TableRow>
               </TableHead>
               <TableBody>
-                {Object.values(listedObj).map(row => (
-                  Object.entries(row.data).map((key, values) => (
+              {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
                   <>
-                  <TableRow key={key[1].transactionid}>
+                  <TableRow key={row.transactionid}>
                     <TableCell
                       classes={{
                         root:
@@ -184,16 +203,16 @@ const listedObj = Object.values(list);
                       <Box alignItems="center" display="flex">
                         <Box display="flex" alignItems="flex-start">
                           <Box fontSize=".875rem" component="span">
-                            {key[1].refercode}
+                            {row.refercode}
                           </Box>
                         </Box>
                       </Box>
                     </TableCell>
                     <TableCell classes={{ root: classes.tableCellRoot }}>
-                      {key[1].totalrefer}
+                      {row.totalrefer}
                     </TableCell>
                     <TableCell classes={{ root: classes.tableCellRoot }}>
-                      {key[1].uid}
+                      {row.uid}
                     </TableCell>
                   </TableRow>
                   </>
@@ -207,7 +226,17 @@ const listedObj = Object.values(list);
             component={CardActions}
             justifyContent="flex-end"
           >
-            <Pagination rowLength={100} maxColumns={5} count={3} color="primary" variant="outlined" />
+          {(rows.length) ? <TablePagination
+            rowsPerPageOptions={false}
+            component="div"
+            count={rowslength}
+            backgroundColor="primary"
+            variant="outlined"
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          /> : null}
           </Box>
         </Card>
       </Container>

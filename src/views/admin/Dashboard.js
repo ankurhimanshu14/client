@@ -350,17 +350,7 @@ const handleChangePage = (event, newPage) => {
 const handleChangeRowsPerPage = (event) => {
   setRowsPerPage(+event.target.value);
   setPage(0);
-}; 
-
-const columns = [
-  { id: 'date', label: 'Date' },
-  { id: 'payment', label: 'Payment', align: 'right' },
-  { id: 'totalclicks', label: 'Clicks', align: "right" },
-  { id: 'totalconversion', label: 'Conversion', align: "right" },
-  { id: 'totalcr', label: 'Cr', align: "right" },
-  { id: 'totalpayout', label: 'Payout', align: "right" },
-  { id: 'totalrevenue', label: 'Revenue', align: "right" }
-];
+};
 
 function createData(l) {
   const listedObj = Object.values(l);
