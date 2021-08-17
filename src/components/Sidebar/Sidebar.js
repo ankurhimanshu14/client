@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Collapse from '@material-ui/core/Collapse';
-import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useLocation, Link } from "react-router-dom";
@@ -19,8 +19,8 @@ import ListItem from "@material-ui/core/ListItem";
 import routes from '../../routes';
 
 import componentStyles from "../../assets/theme/components/sidebar.js";
-import KeyboardArrowRightSharp from '@material-ui/icons/KeyboardArrowRightSharp';
-import KeyboardArrowDownSharp from '@material-ui/icons/KeyboardArrowDownSharp';
+import ArrowForwardSharpIcon from '@material-ui/icons/ArrowForwardSharp';
+import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp';
 
 const useStyles = makeStyles(componentStyles);
 
@@ -103,7 +103,9 @@ export default function Sidebar() {
                       />
                   </Box>
                     {prop.name}
-                    { (prop.item.length > 0) ? (open[prop.id] ? <KeyboardArrowDownSharp style={{marginLeft: '2rem'}} /> : <KeyboardArrowRightSharp style={{marginLeft: '2rem'}} />) : null}
+                    <Grid style={{marginLeft: "-1rem"}} container xs={12} direction="row" justifyContent="flex-end" alignItems="center">
+                    { (prop.item.length > 0) ? (open[prop.id] ? <ArrowDownwardSharpIcon className={classes.icon} /> : <ArrowForwardSharpIcon className={classes.icon} />) : null}
+                    </Grid>
                   </ListItem>
                 </>
               );
@@ -134,6 +136,12 @@ export default function Sidebar() {
                         selected: classes.listItemSelected,
                       }}
                       selected={location.pathname === p.layout + p.path}>
+                      <Box
+                        component={prop.icon}
+                        width="1.25rem!important"
+                        height="1.25rem!important"
+                        className={classes["text" + prop.iconColor]}
+                      />
                         {p.name}
                       </ListItem>
                     ))}

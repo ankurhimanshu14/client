@@ -33,7 +33,7 @@ var routes = [
         icon: Person,
         iconColor: "WarningLight",
         component: Profile,
-        layout: "/admin/index",
+        layout: "/admin",
       },
       {
         id: 'login',
@@ -42,7 +42,7 @@ var routes = [
         icon: VpnKey,
         iconColor: "Info",
         component: Login,
-        layout: "/auth/index"
+        layout: "/auth"
       },
     ]
   },
@@ -62,7 +62,7 @@ var routes = [
         icon: Tv,
         iconColor: "Primary",
         component: Dashboard,
-        layout: "/admin/refer-details",
+        layout: "/admin",
       },
       {
         id: 'subreferdetails2',
@@ -71,7 +71,7 @@ var routes = [
         icon: SearchSharpIcon,
         iconColor: "Error",
         component: Search,
-        layout: "/admin/refer-details",
+        layout: "/admin",
       },
       {
         id: 'subpaytm2',
@@ -80,7 +80,7 @@ var routes = [
         icon: AccountBalanceSharpIcon,
         iconColor: "Error",
         component: Paytm,
-        layout: "/admin/refer-details",
+        layout: "/admin",
       },
     ]
   },
@@ -126,3 +126,41 @@ var routes = [
   }
 ];
 export default routes;
+
+
+// {
+//   id: 'redeem-history',
+//   path: "/",
+//   name: "Redeem History",
+//   icon: AccountBalanceSharpIcon,
+//   iconColor: "Error",
+//   component: "",
+//   layout: "/",
+//   item:[
+//     {
+//       id: 'paytm',
+//       path: "/paytm",
+//       name: "PayTM",
+//       icon: Person,
+//       iconColor: "WarningLight",
+//       component: Paytm,
+//       layout: "/redeem-history",
+//     },
+//     {
+//       id: 'login',
+//       path: "/login",
+//       name: "Google Giftcard",
+//       icon: VpnKey,
+//       iconColor: "Info",
+//       component: Paytm,
+//       layout: "/auth/index"
+//     },
+//     {
+//       id: 'login',
+//       path: "/login",
+//       name: "Freefire",
+//       icon: VpnKey,
+//       iconColor: "Info",
+//       component: Paytm,
+//       layout: "/auth/index"
+//     },

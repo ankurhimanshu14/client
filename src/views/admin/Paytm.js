@@ -31,6 +31,8 @@ import componentStyles from "../../assets/theme/views/admin/tables.js";
 
 const useStyles = makeStyles(componentStyles);
 
+let arr = [];
+
 const Search = (props) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -144,23 +146,22 @@ const Search = (props) => {
   let rowslength;
   rows.forEach(val => {rowslength = val.length})
 
-  // const[checked, setChecked] = React.useState({
-  //   status: false
-  // });
-  // const[checklist, setChecklist] = React.useState({
-  //   selected: []
-  // });
+  const[checked, setChecked] = React.useState(false);
+  const[checklist, setChecklist] = React.useState({
+    selected: []
+  });
+  
+  const handleCheck = e => {
+    setChecked({...checked, [e.target.name] : e.target.checked });
+    arr.push(e.target.name);
+    setChecklist({checklist: arr});
+  }
 
-  // const handleCheck = (e) => {
-  //   setChecked({...checked, [e.target.name]: e.target.checked});
-  //   // setChecklist(checklist.selected.push(e.target.value));
-  // }
+  console.log(checklist);
 
-  // console.log(checklist);
-
-  // const submitDelete = () => {
-  //   console.log(checklist);
-  // }
+  const submitDelete = () => {
+    console.log(checklist);
+  }
 
   return (
     <>
@@ -249,9 +250,9 @@ const Search = (props) => {
                 </TableCell>
               </>
               ))}
-              {/* <TableCell>
+              <TableCell>
                   Select
-              </TableCell> */}
+              </TableCell>
             </TableRow>
               </TableHead>
               <TableBody>
@@ -285,21 +286,21 @@ const Search = (props) => {
                   <TableCell>
                     {row.uid}
                   </TableCell>
-                  {/* <TableCell>
+                  <TableCell>
                   <Checkbox
                     className={classes.root}
                     disableRipple
                     color="default"
-                    checked={checked}
+                    checked={checked[row.name]}
                     onChange={handleCheck}
-                    id={row.refercode}
-                    value={checked.status}
+                    name={row.refercode}
+                    value={checked}
                     checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
                     icon={<span className={classes.icon} />}
-                    // inputProps={{ 'aria-label': 'decorative checkbox' }}
+                    inputProps={{ 'aria-label': 'decorative checkbox' }}
                     {...props}
                   />
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
                 </>
               ))

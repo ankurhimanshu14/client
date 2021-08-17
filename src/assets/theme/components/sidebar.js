@@ -43,7 +43,7 @@ const componentStyles = (theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
+    width: theme.spacing(100) + 1,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(7),
     },
@@ -66,9 +66,9 @@ const componentStyles = (theme) => ({
   },
   listItemRoot: {
     display: "flex",
-    fontSize: "1rem",
+    fontSize: "1.2rem",
     color: theme.palette.sidebarLinks.main,
-    padding: ".1rem 1.5rem !important",
+    padding: ".1rem 0.6rem !important",
     "&:hover": {
       color: theme.palette.sidebarLinks.dark,
     },
@@ -77,7 +77,8 @@ const componentStyles = (theme) => ({
     display: "flex",
     fontSize: ".9rem",
     color: theme.palette.sidebarLinks.main,
-    paddingLeft: "6rem!important",
+    paddingLeft: "3rem!important",
+    paddingTop: "1rem!important",
     "&:hover": {
       color: theme.palette.sidebarLinks.dark,
     },
