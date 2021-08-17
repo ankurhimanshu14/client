@@ -19,7 +19,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Pagination from "@material-ui/lab/Pagination";
+import TablePagination from "@material-ui/core/TablePagination";
 
 // core components
 import Header from "../../components/Headers/Header.js";
@@ -340,7 +340,38 @@ const options = {
   }
 };
 
-const listedObj = Object.values(list);
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
+
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  setPage(0);
+}; 
+
+const columns = [
+  { id: 'date', label: 'Date' },
+  { id: 'payment', label: 'Payment', align: 'right' },
+  { id: 'totalclicks', label: 'Clicks', align: "right" },
+  { id: 'totalconversion', label: 'Conversion', align: "right" },
+  { id: 'totalcr', label: 'Cr', align: "right" },
+  { id: 'totalpayout', label: 'Payout', align: "right" },
+  { id: 'totalrevenue', label: 'Revenue', align: "right" }
+];
+
+function createData(l) {
+  const listedObj = Object.values(l);
+  return Object.values(listedObj).map(row => {return Object.entries(row.data)})
+}
+
+const rows = createData(list);
+
+let rowslength = 0;
+
+rows.forEach(val => {rowslength = val.length})
 
   return (
     <>
@@ -480,10 +511,9 @@ const listedObj = Object.values(list);
                 </TableRow>
               </TableHead>
               <TableBody>
-              {Object.values(listedObj).map(row => (
-                Object.entries(row.data).map((key, value) => (
+              {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
                   <>
-                <TableRow hover key={key[0]}>
+                <TableRow hover key={row[0]}>
                   <TableCell
                     classes={{
                       root:
@@ -498,13 +528,13 @@ const listedObj = Object.values(list);
                     <Box alignItems="center" display="flex">
                       <Box display="flex" alignItems="flex-start">
                         <Box fontSize=".875rem" component="span">
-                          {key[0]}
+                          {row[0]}
                         </Box>
                       </Box>
                     </Box>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
-                    {key[1].payment}
+                    {row[1].payment}
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
                     <Box paddingTop=".35rem" paddingBottom=".35rem">
@@ -519,7 +549,7 @@ const listedObj = Object.values(list);
                           classes.verticalAlignMiddle + " " + classes.bgWarning
                         }
                       ></Box>
-                      {key[1].totalclicks}
+                      {row[1].totalclicks}
                     </Box>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
@@ -535,7 +565,7 @@ const listedObj = Object.values(list);
                           classes.verticalAlignMiddle + " " + classes.bgWarning
                         }
                       ></Box>
-                      {key[1].totalconversion}
+                      {row[1].totalconversion}
                     </Box>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
@@ -551,7 +581,7 @@ const listedObj = Object.values(list);
                           classes.verticalAlignMiddle + " " + classes.bgWarning
                         }
                       ></Box>
-                      {key[1].totalcr}
+                      {row[1].totalcr}
                     </Box>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
@@ -567,7 +597,7 @@ const listedObj = Object.values(list);
                           classes.verticalAlignMiddle + " " + classes.bgWarning
                         }
                       ></Box>
-                      {key[1].totalpayout}
+                      {row[1].totalpayout}
                     </Box>
                   </TableCell>
                   <TableCell classes={{ root: classes.tableCellRoot }}>
@@ -583,7 +613,7 @@ const listedObj = Object.values(list);
                           classes.verticalAlignMiddle + " " + classes.bgWarning
                         }
                       ></Box>
-                      {key[1].totalrevenue}
+                      {row[1].totalrevenue}
                     </Box>
                   </TableCell>
                   </TableRow>
@@ -598,7 +628,17 @@ const listedObj = Object.values(list);
             component={CardActions}
             justifyContent="flex-end"
           >
-          <Pagination count={3} maxColumns={7} color="primary" variant="outlined" />
+          {(rows.length) ? <TablePagination
+            rowsPerPageOptions={false}
+            component="div"
+            count={rowslength}
+            backgroundColor="primary"
+            variant="outlined"
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          /> : null}
           </Box>
         </Card>
         <Card classes={{ root: classes.cardRoot }}>
