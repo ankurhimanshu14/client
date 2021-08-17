@@ -66,7 +66,7 @@ const componentStyles = (theme) => ({
   },
   listItemRoot: {
     display: "flex",
-    fontSize: ".9rem",
+    fontSize: "1rem",
     color: theme.palette.sidebarLinks.main,
     padding: ".1rem 1.5rem !important",
     "&:hover": {
@@ -77,7 +77,7 @@ const componentStyles = (theme) => ({
     display: "flex",
     fontSize: ".9rem",
     color: theme.palette.sidebarLinks.main,
-    padding: ".3rem 1.5rem !important",
+    paddingLeft: "6rem!important",
     "&:hover": {
       color: theme.palette.sidebarLinks.dark,
     },

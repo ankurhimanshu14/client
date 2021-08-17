@@ -33,7 +33,7 @@ var routes = [
         icon: Person,
         iconColor: "WarningLight",
         component: Profile,
-        layout: "/admin",
+        layout: "/admin/index",
       },
       {
         id: 'login',
@@ -42,7 +42,7 @@ var routes = [
         icon: VpnKey,
         iconColor: "Info",
         component: Login,
-        layout: "/auth"
+        layout: "/auth/index"
       },
     ]
   },
@@ -62,7 +62,7 @@ var routes = [
         icon: Tv,
         iconColor: "Primary",
         component: Dashboard,
-        layout: "/admin",
+        layout: "/admin/refer-details",
       },
       {
         id: 'subreferdetails2',
@@ -71,7 +71,7 @@ var routes = [
         icon: SearchSharpIcon,
         iconColor: "Error",
         component: Search,
-        layout: "/admin",
+        layout: "/admin/refer-details",
       },
       {
         id: 'subpaytm2',
@@ -80,7 +80,7 @@ var routes = [
         icon: AccountBalanceSharpIcon,
         iconColor: "Error",
         component: Paytm,
-        layout: "/admin",
+        layout: "/admin/refer-details",
       },
     ]
   },

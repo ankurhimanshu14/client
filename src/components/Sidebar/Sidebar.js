@@ -19,6 +19,8 @@ import ListItem from "@material-ui/core/ListItem";
 import routes from '../../routes';
 
 import componentStyles from "../../assets/theme/components/sidebar.js";
+import KeyboardArrowRightSharp from '@material-ui/icons/KeyboardArrowRightSharp';
+import KeyboardArrowDownSharp from '@material-ui/icons/KeyboardArrowDownSharp';
 
 const useStyles = makeStyles(componentStyles);
 
@@ -101,6 +103,7 @@ export default function Sidebar() {
                       />
                   </Box>
                     {prop.name}
+                    { (prop.item.length > 0) ? (open[prop.id] ? <KeyboardArrowDownSharp style={{marginLeft: '2rem'}} /> : <KeyboardArrowRightSharp style={{marginLeft: '2rem'}} />) : null}
                   </ListItem>
                 </>
               );
