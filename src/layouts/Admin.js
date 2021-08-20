@@ -35,7 +35,7 @@ const Admin = () => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.item.length === 0) {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -44,18 +44,27 @@ const Admin = () => {
           />
         );
       } else {
-        return null;
+        prop.item.map((p, k) => {
+          return (
+            <Route path={p.layout + p.path} render={p.component}  />
+          );
+        })
       }
-    });
-  };
+    })
+  }
 
   const getBrandText = () => {
-    for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-        return routes[i].name;
+    routes.map((prop, key) => {
+      if (location.pathname === prop.layout + prop.path) {
+        return prop.name
+      } else {
+        prop.item.map((p, k) => {
+          if (location.pathname === p.layout + p.path){
+            return p.name
+          }
+        })
       }
-    }
-    return "Brand";
+    })
   };
 
   return (
@@ -95,7 +104,7 @@ const Admin = () => {
           <AdminNavbar brandText={getBrandText(location.pathname)} />
           <Switch>
             {getRoutes(routes)}
-            <Redirect from="*" to="/admin/index" />
+            {/* <Redirect from="*" to="/admin/index" /> */}
           </Switch>
           <Container
             maxWidth={false}

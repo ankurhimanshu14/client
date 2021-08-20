@@ -21,8 +21,9 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Route path="/redeem-history" render={(props) => <AdminLayout {...props} />} />
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-        <Redirect from="/" to="/admin/index" />
+        {/* <Redirect from="/" to="/admin/index" /> */}
       </Switch>
     </BrowserRouter>
   </ThemeProvider>,
