@@ -2,6 +2,8 @@
 import Dashboard from "./views/admin/Dashboard.js";
 import Search from "./views/admin/Search.js";
 import Paytm from "./views/admin/Paytm.js";
+import TaskAnalytics from './views/admin/TaskAnalytics.js';
+import Task from './views/admin/Task.js';
 import Login from "./views/auth/Login.js";
 // import Maps from "./views/admin/Maps.js";
 import Profile from "./views/admin/Profile.js";
@@ -91,6 +93,26 @@ var routes = [
     icon: AccountBalanceSharpIcon,
     iconColor: "Error",
     component: Paytm,
+    layout: "/admin",
+    item:[]
+  },
+  {
+    id: 'task-analytics',
+    path: "/task-analytics",
+    name: "Task Analytics",
+    icon: AccountBalanceSharpIcon,
+    iconColor: "Info",
+    component: TaskAnalytics,
+    layout: "/admin",
+    item:[]
+  },
+  {
+    id: 'task',
+    path: "/task",
+    name: "Task",
+    icon: AccountBalanceSharpIcon,
+    iconColor: "Info",
+    component: Task,
     layout: "/admin",
     item:[]
   },
