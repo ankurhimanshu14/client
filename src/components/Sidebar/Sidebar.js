@@ -15,27 +15,21 @@ import { useLocation, Link } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons components
-
 import routes from '../../routes';
-
 import componentStyles from "../../assets/theme/components/sidebar.js";
 import ArrowForwardSharpIcon from '@material-ui/icons/ArrowForwardSharp';
 import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp';
-
 const useStyles = makeStyles(componentStyles);
-
 export default function Sidebar() {
   const location = useLocation();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
   const handleClick = item => {
     setOpen( prevState => ( 
       { [ item ]: !prevState[ item ] } 
     ) )
   }
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -128,20 +122,20 @@ export default function Sidebar() {
                     <Collapse in={open[prop.id]} timeout="auto" unmountOnExit>
                     {prop.item.map((p, k) => (
                       <ListItem
-                      key={p.id}
+                      key={prop.id}
                       component={Link}
                       to={p.layout + p.path}
-                      classes={{
+                      classes={{  
                         root: classes.sublistItemRoot,
                         selected: classes.listItemSelected,
                       }}
                       selected={location.pathname === p.layout + p.path}>
                       <Box
-                        component={p.icon}
+                        component={prop.icon}
                         width="1.25rem!important"
                         height="1.25rem!important"
-                        className={classes["text" + p.iconColor]}
-                      />
+                        className={classes["text" + prop.iconColor]}
+                        />
                         {p.name}
                       </ListItem>
                     ))}

@@ -10,23 +10,19 @@ import InputLabel from "@material-ui/core/InputLabel";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 // @material-ui/icons components
 import Search from "@material-ui/icons/Search";
-
 // core components
 import AdminNavbar from "../components/Navbars/AdminNavbar.js";
 import AdminFooter from "../components/Footers/AdminFooter.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import NavbarDropdown from "../components/Dropdowns/NavbarDropdown.js";
-
 import routes from "../routes.js";
-
 import componentStyles from "../assets/theme/layouts/admin.js";
-
 const useStyles = makeStyles(componentStyles);
 
 const Admin = () => {
   const classes = useStyles();
   const location = useLocation();
-
+  
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -35,7 +31,7 @@ const Admin = () => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.item.length === 0) {
+      if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -44,27 +40,18 @@ const Admin = () => {
           />
         );
       } else {
-        prop.item.map((p, k) => {
-          return (
-            <Route path={p.layout + p.path} render={p.component}  />
-          );
-        })
+        return null;
       }
-    })
-  }
+    });
+  };
 
   const getBrandText = () => {
-    routes.map((prop, key) => {
-      if (location.pathname === prop.layout + prop.path) {
-        return prop.name
-      } else {
-        prop.item.map((p, k) => {
-          if (location.pathname === p.layout + p.path){
-            return p.name
-          }
-        })
+    for (let i = 0; i < routes.length; i++) {
+      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+        return routes[i].name;
       }
-    })
+    }
+    return "Brand";
   };
 
   return (
@@ -104,7 +91,7 @@ const Admin = () => {
           <AdminNavbar brandText={getBrandText(location.pathname)} />
           <Switch>
             {getRoutes(routes)}
-            {/* <Redirect from="*" to="/admin/index" /> */}
+            <Redirect from="*" to="/admin/index" />
           </Switch>
           <Container
             maxWidth={false}
@@ -118,5 +105,4 @@ const Admin = () => {
     </>
   );
 };
-
 export default Admin;
