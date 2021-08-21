@@ -128,7 +128,7 @@ export default function Sidebar() {
                     <Collapse in={open[prop.id]} timeout="auto" unmountOnExit>
                     {prop.item.map((p, k) => (
                       <ListItem
-                      key={prop.id}
+                      key={p.id}
                       component={Link}
                       to={p.layout + p.path}
                       classes={{
@@ -137,10 +137,10 @@ export default function Sidebar() {
                       }}
                       selected={location.pathname === p.layout + p.path}>
                       <Box
-                        component={prop.icon}
+                        component={p.icon}
                         width="1.25rem!important"
                         height="1.25rem!important"
-                        className={classes["text" + prop.iconColor]}
+                        className={classes["text" + p.iconColor]}
                       />
                         {p.name}
                       </ListItem>

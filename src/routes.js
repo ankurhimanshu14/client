@@ -27,24 +27,43 @@ var routes = [
     iconColor: "Primary",
     component: Dashboard,
     layout: "/admin",
-    item: [
+    item: []
+  },
+  {
+    id: 'redeem-history',
+    path: "/index",
+    name: "Redeem History",
+    icon: AccountBalanceSharpIcon,
+    iconColor: "Error",
+    component: null,
+    layout: "/admin",
+    item:[
       {
-        id: 'user-profile',
-        path: "/user-profile",
-        name: "User Profile",
+        id: 'paytm',
+        path: "/paytm",
+        name: "PayTM",
         icon: Person,
         iconColor: "WarningLight",
-        component: Profile,
+        component: Paytm,
         layout: "/admin",
       },
       {
-        id: 'login',
-        path: "/login",
-        name: "Login",
+        id: 'google-giftcard',
+        path: "/google-giftcard",
+        name: "Google Giftcard",
         icon: VpnKey,
         iconColor: "Info",
-        component: Login,
-        layout: "/auth"
+        component: Search,
+        layout: "/admin"
+      },
+      {
+        id: 'freefire',
+        path: "/freefire",
+        name: "Freefire",
+        icon: VpnKey,
+        iconColor: "Info",
+        component: Dashboard,
+        layout: "/admin"
       },
     ]
   },
@@ -56,45 +75,7 @@ var routes = [
     iconColor: "Error",
     component: Search,
     layout: "/admin",
-    item: [
-      {
-        id: 'subdashboard2',
-        path: "/index2",
-        name: "Dashboard",
-        icon: Tv,
-        iconColor: "Primary",
-        component: Dashboard,
-        layout: "/admin",
-      },
-      {
-        id: 'subreferdetails2',
-        path: "/refer-details2",
-        name: "Refer Details",
-        icon: SearchSharpIcon,
-        iconColor: "Error",
-        component: Search,
-        layout: "/admin",
-      },
-      {
-        id: 'subpaytm2',
-        path: "/paytm2",
-        name: "Paytm",
-        icon: AccountBalanceSharpIcon,
-        iconColor: "Error",
-        component: Paytm,
-        layout: "/admin",
-      },
-    ]
-  },
-  {
-    id: 'paytm',
-    path: "/paytm",
-    name: "Paytm",
-    icon: AccountBalanceSharpIcon,
-    iconColor: "Error",
-    component: Paytm,
-    layout: "/admin",
-    item:[]
+    item: []
   },
   {
     id: 'task-analytics',
