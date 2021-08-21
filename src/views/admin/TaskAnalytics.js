@@ -97,7 +97,6 @@ const Search = (props) => {
   }
 
   const columns = [
-    { id: 'taskId', label: 'Task ID' },
     { id: 'taskname', label: 'Task Name'},
     { id: 'totalclicks', label: 'Clicks', align: "right" },
     { id: 'totalconversion', label: 'Conversion', align: "right" },
@@ -112,7 +111,6 @@ const Search = (props) => {
   }
 
   const rows = createData(list);
-
   let rowslength;
   rows.forEach(val => {rowslength = val.length})
 
@@ -192,9 +190,6 @@ const Search = (props) => {
               {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
                 <>
                 <TableRow hover key={data}>
-                <TableCell>
-                    {data}
-                  </TableCell>
                   <TableCell>
                     {row.taskname}
                   </TableCell>

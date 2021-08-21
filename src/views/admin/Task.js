@@ -278,7 +278,7 @@ const Task = (props) => {
       <Container
         maxWidth={false}
         component={Box}
-        marginTop="-24rem"
+        marginTop= "20rem"
         classes={{ root: classes.containerRoot }}
       >
         <Card classes={{ root: classes.cardRoot }}>
