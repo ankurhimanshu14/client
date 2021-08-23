@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 // @material-ui/core components
 import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -20,11 +20,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors'
 import TablePagination from '@material-ui/core/TablePagination';
 import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
+import { red, yellow, blue } from '@material-ui/core/colors';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
@@ -32,8 +32,6 @@ import UserHeader from "../../components/Headers/UserHeader.js";
 import componentStyles from "../../assets/theme/views/admin/tables.js";
 
 const useStyles = makeStyles(componentStyles);
-
-let arr = [];
 
 const Task = (props) => {
   const classes = useStyles();
@@ -49,91 +47,90 @@ const Task = (props) => {
     setPage(0);
   };  
 
-  const [data, setData] = React.useState({
-    date: null,
-    taskid: null,
-    amount: null,
-    totalotheroffer: null,
-    totalredeem: null,
-    totalsurvey: null,
-    totaltaskoffer: null,
-    uid: null,
-  });
-  const [list, setList] = React.useState([])
-
-  const [radio, setRadio] = React.useState('none');
-
+  // const [data, setData] = React.useState();
+  const [removetasks, setRemovetasks] = React.useState([])
   React.useEffect(() => {
-    if (radio === 'none') {
       const requestOptions = {
         credentials: 'include',
         mode: 'cors',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: null
+        body: JSON.stringify({taskid: null})
       };
   
-      fetch('https://mcashapi.xyz/api/v1/paytmredeemfetch', requestOptions)
+      fetch('https://mcashapi.xyz/api/v1/removetasksfetch', requestOptions)
         .then(res => res.json())
         .then(doc => {
-          setList({list: doc})
+          setRemovetasks({removetasks: doc})
         })
         .catch(err => alert(err))
-    }
-  }, [radio])
+  }, [])
 
-  const handleInputChange = e => {
-    e.preventDefault();
-    setData({ ...data, [e.target.name]: e.target.value })
-  };
+  const [tasks, setTasks] = React.useState([])
+  React.useEffect(() => {
+      const requestOptions = {
+        credentials: 'include',
+        mode: 'cors',
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({taskid: null})
+      };
+  
+      fetch('https://mcashapi.xyz/api/v1/removetasksfetch', requestOptions)
+        .then(res => res.json())
+        .then(doc => {
+          setTasks({tasks: doc})
+        })
+        .catch(err => alert(err))
+  }, [])
 
-  const handleSubmit = () => {
-    console.log(data);
+  const handleDelete = (appId) => {
     const requestOptions = {
       credentials: 'include',
       mode: 'cors',
-      method: 'POST',
+      method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(appId)
     };
 
-    fetch('https://mcashapi.xyz/api/v1/paytmredeemfetch', requestOptions)
+    fetch('****', requestOptions)
       .then(res => res.json())
-      .then(doc => {
-        if (doc.data) {
-          setList({ list: doc })
-        } else {
-          alert("Value not found");
-        }
-      })
+      .then(doc => setRemovetasks({list: doc}))
       .catch(err => {
         alert(err);
       })
   }
 
-  const BlueRadio = withStyles({
-    root: {
-      color: blue[400],
-      '&$checked': {
-        color: blue[600],
-      },
-    },
-    checked: {},
-  })((props) => <Radio color="default" {...props} />);
+  const columns1 = [
+    { id: 'appDescription', label: 'App Description'},
+    { id: 'appId', label: 'App ID', align: "right" },
+    { id: 'appImageUrl', label: 'Image', align: "center" },
+    { id: 'appName', label: 'App Name', align: "right" },
+    { id: 'appPackageName', label: 'Package Name', align: "right" },
+    { id: 'appRewardAmount', label: 'Reward Amount', align: "right" },
+    { id: 'caps', label: 'Caps', align: "right"},
+    { id: 'completecaps', label: 'Complete Caps', align: "right" },
+    { id: 'payout', label: 'Payout', align: "right"},
+    { id: 'revenue', label: 'Revenue', align: "right"},
+    { id: 'totalcap', label: 'Total Cap', align: "right"},
+    { id: 'totalevents', label: 'Total Events', align: "right"},
+    { id: 'del', label: 'Delete', align: "right"},
+    { id: 'edit', label: 'Edit', align: "right"}
+  ]
 
-  const handleChange = (event) => {
-    setRadio(event.target.value);
-  };
-
-  const columns = [
-    { id: 'date', label: 'Date' },
-    { id: 'taskid', label: 'Task ID', align: "right" },
-    { id: 'amount', label: 'Amount', align: "right" },
-    { id: 'totalotheroffer', label: 'Total Other Offer', align: "right" },
-    { id: 'totalredeem', label: 'Total Redeem', align: "right" },
-    { id: 'totalsurvey', label: 'Total Survey', align: "right" },
-    { id: 'totaltaskoffer', label: 'Total Task Offer', align: "right" },
-    { id: 'uid', label: 'User ID', align: "right"}
+  const columns2 = [
+    { id: 'appDescription', label: 'App Description'},
+    { id: 'appId', label: 'App ID', align: "right" },
+    { id: 'appImageUrl', label: 'Image', align: "center" },
+    { id: 'appName', label: 'App Name', align: "right" },
+    { id: 'appPackageName', label: 'Package Name', align: "right" },
+    { id: 'appRewardAmount', label: 'Reward Amount', align: "right" },
+    { id: 'caps', label: 'Caps', align: "right"},
+    { id: 'completecaps', label: 'Complete Caps', align: "right" },
+    { id: 'payout', label: 'Payout', align: "right"},
+    { id: 'revenue', label: 'Revenue', align: "right"},
+    { id: 'totalcap', label: 'Total Cap', align: "right"},
+    { id: 'totalevents', label: 'Total Events', align: "right"},
   ]
 
   function createData(l) {
@@ -141,10 +138,13 @@ const Task = (props) => {
     return Object.values(listedObj).map(row => Object.entries(row.data).map((key, val) => {return key[1]}))
   }
 
-  const rows = createData(list);
+  const rows1 = createData(removetasks);
+  let rowslength1;
+  rows1.forEach(val => {rowslength1 = val.length})
 
-  let rowslength;
-  rows.forEach(val => {rowslength = val.length})
+  const rows2 = createData(tasks);
+  let rowslength2;
+  rows2.forEach(val => {rowslength2 = val.length})
 
   return (
     <>
@@ -158,14 +158,14 @@ const Task = (props) => {
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader
             className={classes.cardHeader}
-            title="PayTM Analytics"
+            title="Task Actions"
             titleTypographyProps={{
               component: Box,
               marginBottom: "0!important",
               variant: "h3",
             }}
           ></CardHeader>
-          <Grid container xs={12}>
+          {/* <Grid container xs={12}>
             <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
               <Box
                 justifyContent="flex-end"
@@ -196,7 +196,7 @@ const Task = (props) => {
                 </form>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
           <TableContainer>
             <Box
               component={Table}
@@ -205,7 +205,7 @@ const Task = (props) => {
             >
               <TableHead>
               <TableRow>
-              {columns.map((column) => (
+              {columns1.map((column) => (
                 <>
                 <TableCell
                   key={column.id}
@@ -217,37 +217,55 @@ const Task = (props) => {
               </>
               ))}
             </TableRow>
+
               </TableHead>
               <TableBody>
-              {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
+              {rows1.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
                 <>
-                <TableRow hover key={row.taskid}>
+                <TableRow hover key={row.appId}>
                   <TableCell>
-                    {row.date}
-                  </TableCell>
-                  <TableCell>
-                    {row.taskid}
+                    {row.appDescription}
                   </TableCell>
                   <TableCell align="right">
-                    {row.paytmnumber}
+                    {row.appId}
                   </TableCell>
                   <TableCell align="right">
-                    {row.amount}
+                  <Tooltip title={(row.eventdecription === undefined && row.eventdecription2 === undefined ) ? "" : row.eventdecription + " " + row.eventdecription2}>
+                    <img src={row.appImageUrl} width="30rem"/>
+                  </Tooltip>
                   </TableCell>
                   <TableCell align="right">
-                    {row.totalotheroffer}
+                  <a href={row.appUrl}>{row.appName}</a>
                   </TableCell>
                   <TableCell align="right">
-                    {row.totalredeem}
+                    {row.appPackageName}
                   </TableCell>
                   <TableCell align="right">
-                    {row.totalsurvey}
+                    {row.appRewardAmount}
                   </TableCell>
                   <TableCell align="right">
-                    {row.totaltaskoffer}
+                    {row.caps}
                   </TableCell>
-                  <TableCell>
-                    {row.uid}
+                  <TableCell align="right">
+                    {row.completecaps}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.payout}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.revenue}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.totalcap}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.totalevents}
+                  </TableCell>
+                  <TableCell align="right">
+                    <IconButton color={red[500]}><Delete onClick={() => handleDelete(row.appId) }/></IconButton>
+                  </TableCell>
+                  <TableCell align="right">
+                    <IconButton color={yellow[500]}><EditSharpIcon /></IconButton>
                   </TableCell>
                 </TableRow>
                 </>
@@ -261,10 +279,10 @@ const Task = (props) => {
             component={CardActions}
             justifyContent="flex-end"
           >
-          {(rows.length) ? <TablePagination
+          {(rows1.length) ? <TablePagination
             rowsPerPageOptions={false}
             component="div"
-            count={rowslength}
+            count={rowslength1}
             backgroundColor="primary"
             variant="outlined"
             rowsPerPage={rowsPerPage}
@@ -278,20 +296,20 @@ const Task = (props) => {
       <Container
         maxWidth={false}
         component={Box}
-        marginTop= "20rem"
+        marginTop= "2rem"
         classes={{ root: classes.containerRoot }}
       >
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader
             className={classes.cardHeader}
-            title="PayTM Analytics"
+            title="Tasks"
             titleTypographyProps={{
               component: Box,
               marginBottom: "0!important",
               variant: "h3",
             }}
           ></CardHeader>
-          <Grid container xs={12}>
+          {/* <Grid container xs={12}>
             <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
               <Box
                 justifyContent="flex-end"
@@ -322,7 +340,7 @@ const Task = (props) => {
                 </form>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
           <TableContainer>
             <Box
               component={Table}
@@ -331,11 +349,10 @@ const Task = (props) => {
             >
               <TableHead>
               <TableRow>
-              {columns.map((column) => (
+              {columns2.map((column) => (
                 <>
                 <TableCell
                   key={column.id}
-                  align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
@@ -345,35 +362,46 @@ const Task = (props) => {
             </TableRow>
               </TableHead>
               <TableBody>
-              {rows.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
+              {rows2.map(val => (val.slice(page*rowsPerPage, page*rowsPerPage + rowsPerPage).map((row) => (
                 <>
-                <TableRow hover key={row.taskid}>
+                <TableRow hover key={row.appId}>
                   <TableCell>
-                    {row.date}
-                  </TableCell>
-                  <TableCell>
-                    {row.taskid}
+                    {row.appDescription}
                   </TableCell>
                   <TableCell align="right">
-                    {row.paytmnumber}
+                    {row.appId}
                   </TableCell>
                   <TableCell align="right">
-                    {row.amount}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.totalotheroffer}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.totalredeem}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.totalsurvey}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.totaltaskoffer}
+                  <Tooltip title={(row.eventdecription === undefined && row.eventdecription2 === undefined ) ? "" : row.eventdecription + " " + row.eventdecription2}>
+                    <img src={row.appImageUrl} width="30rem"/>
+                  </Tooltip>
                   </TableCell>
                   <TableCell>
-                    {row.uid}
+                  <a href={row.appUrl}>{row.appName}</a>
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.appPackageName}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.appRewardAmount}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.caps}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.completecaps}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.payout}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.revenue}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.totalcap}
+                  </TableCell>
+                  <TableCell align="right">
+                    {row.totalevents}
                   </TableCell>
                 </TableRow>
                 </>
@@ -387,10 +415,10 @@ const Task = (props) => {
             component={CardActions}
             justifyContent="flex-end"
           >
-          {(rows.length) ? <TablePagination
+          {(rows2.length) ? <TablePagination
             rowsPerPageOptions={false}
             component="div"
-            count={rowslength}
+            count={rowslength2}
             backgroundColor="primary"
             variant="outlined"
             rowsPerPage={rowsPerPage}
