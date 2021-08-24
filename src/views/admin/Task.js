@@ -25,9 +25,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
 import EditSharpIcon from '@material-ui/icons/EditSharp';
 import { red, yellow, blue } from '@material-ui/core/colors';
+import EditForm from '../../components/Forms/EditForm';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
+import AddForm from '../../components/Forms/AddForm';
 
 import componentStyles from "../../assets/theme/views/admin/tables.js";
 
@@ -165,38 +167,6 @@ const Task = (props) => {
               variant: "h3",
             }}
           ></CardHeader>
-          {/* <Grid container xs={12}>
-            <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
-              <Box
-                justifyContent="flex-end"
-                display="flex"
-                flexWrap="wrap"
-              >
-                <form className={classes.textfieldContainer} noValidate>
-                  <TextField
-                    id={radio}
-                    name={radio}
-                    label="Search"
-                    type="text"
-                    variant="outlined"
-                    margin="10px"
-                    value={(radio==="taskid") ? data.taskid : data.paytmnumber }
-                    onChange={handleInputChange}
-                    className={classes.textField}
-                  />
-                  <Button
-                    variant="contained"
-                    color="info"
-                    margin="1rem!important"
-                    onClick={handleSubmit}
-                    classes={classes.buttonRootUnselected}
-                  >
-                    Submit
-                  </Button>
-                </form>
-              </Box>
-            </Grid>
-          </Grid> */}
           <TableContainer>
             <Box
               component={Table}
@@ -265,7 +235,7 @@ const Task = (props) => {
                     <IconButton color={red[500]}><Delete onClick={() => handleDelete(row.appId) }/></IconButton>
                   </TableCell>
                   <TableCell align="right">
-                    <IconButton color={yellow[500]}><EditSharpIcon /></IconButton>
+                    <EditForm props={row} />
                   </TableCell>
                 </TableRow>
                 </>
@@ -309,38 +279,17 @@ const Task = (props) => {
               variant: "h3",
             }}
           ></CardHeader>
-          {/* <Grid container xs={12}>
+          <Grid container xs={12}>
             <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
               <Box
                 justifyContent="flex-end"
                 display="flex"
                 flexWrap="wrap"
               >
-                <form className={classes.textfieldContainer} noValidate>
-                  <TextField
-                    id={radio}
-                    name={radio}
-                    label="Search"
-                    type="text"
-                    variant="outlined"
-                    margin="10px"
-                    value={(radio==="taskid") ? data.taskid : data.paytmnumber }
-                    onChange={handleInputChange}
-                    className={classes.textField}
-                  />
-                  <Button
-                    variant="contained"
-                    color="info"
-                    margin="1rem!important"
-                    onClick={handleSubmit}
-                    classes={classes.buttonRootUnselected}
-                  >
-                    Submit
-                  </Button>
-                </form>
+                <AddForm />
               </Box>
             </Grid>
-          </Grid> */}
+          </Grid>
           <TableContainer>
             <Box
               component={Table}
