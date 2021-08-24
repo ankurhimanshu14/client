@@ -1,7 +1,6 @@
 import React from "react";
 
 // @material-ui/core components
-import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
@@ -22,7 +21,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors'
 import TablePagination from '@material-ui/core/TablePagination';
-import Checkbox from '@material-ui/core/Checkbox';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
@@ -30,8 +28,6 @@ import UserHeader from "../../components/Headers/UserHeader.js";
 import componentStyles from "../../assets/theme/views/admin/tables.js";
 
 const useStyles = makeStyles(componentStyles);
-
-let arr = [];
 
 const Search = (props) => {
   const classes = useStyles();
@@ -146,22 +142,22 @@ const Search = (props) => {
   let rowslength;
   rows.forEach(val => {rowslength = val.length})
 
-  const[checked, setChecked] = React.useState(false);
-  const[checklist, setChecklist] = React.useState({
-    selected: []
-  });
+  // const[checked, setChecked] = React.useState(false);
+  // const[checklist, setChecklist] = React.useState({
+  //   selected: []
+  // });
   
-  const handleCheck = e => {
-    setChecked({...checked, [e.target.name] : e.target.checked });
-    arr.push(e.target.name);
-    setChecklist({checklist: arr});
-  }
+  // const handleCheck = e => {
+  //   setChecked({...checked, [e.target.name] : e.target.checked });
+  //   arr.push(e.target.name);
+  //   setChecklist({checklist: arr});
+  // }
 
-  console.log(checklist);
+  // console.log(checklist);
 
-  const submitDelete = () => {
-    console.log(checklist);
-  }
+  // const submitDelete = () => {
+  //   console.log(checklist);
+  // }
 
   return (
     <>
@@ -250,9 +246,9 @@ const Search = (props) => {
                 </TableCell>
               </>
               ))}
-              <TableCell>
+              {/* <TableCell>
                   Select
-              </TableCell>
+              </TableCell> */}
             </TableRow>
               </TableHead>
               <TableBody>
@@ -286,7 +282,7 @@ const Search = (props) => {
                   <TableCell>
                     {row.uid}
                   </TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                   <Checkbox
                     className={classes.root}
                     disableRipple
@@ -300,7 +296,7 @@ const Search = (props) => {
                     inputProps={{ 'aria-label': 'decorative checkbox' }}
                     {...props}
                   />
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
                 </>
               ))

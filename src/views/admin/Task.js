@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 // @material-ui/core components
-import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -17,14 +15,10 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core/styles';
 import TablePagination from '@material-ui/core/TablePagination';
 import IconButton from '@material-ui/core/IconButton';
 import Delete from '@material-ui/icons/Delete';
-import EditSharpIcon from '@material-ui/icons/EditSharp';
-import { red, yellow, blue } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 import EditForm from '../../components/Forms/EditForm';
 
 // core components
@@ -201,7 +195,7 @@ const Task = (props) => {
                   </TableCell>
                   <TableCell align="right">
                   <Tooltip title={(row.eventdecription === undefined && row.eventdecription2 === undefined ) ? "" : row.eventdecription + " " + row.eventdecription2}>
-                    <img src={row.appImageUrl} width="30rem"/>
+                    <img src={row.appImageUrl} alt={row.appId} width="30rem"/>
                   </Tooltip>
                   </TableCell>
                   <TableCell align="right">
@@ -322,7 +316,7 @@ const Task = (props) => {
                   </TableCell>
                   <TableCell align="right">
                   <Tooltip title={(row.eventdecription === undefined && row.eventdecription2 === undefined ) ? "" : row.eventdecription + " " + row.eventdecription2}>
-                    <img src={row.appImageUrl} width="30rem"/>
+                    <img src={row.appImageUrl} alt={row.appId} width="30rem"/>
                   </Tooltip>
                   </TableCell>
                   <TableCell>

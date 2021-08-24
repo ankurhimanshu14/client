@@ -1,7 +1,6 @@
 import React from "react";
 
 // @material-ui/core components
-import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
@@ -17,12 +16,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { withStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors'
 import TablePagination from '@material-ui/core/TablePagination';
-import Checkbox from '@material-ui/core/Checkbox';
 
 // core components
 import UserHeader from "../../components/Headers/UserHeader.js";
@@ -30,8 +24,6 @@ import UserHeader from "../../components/Headers/UserHeader.js";
 import componentStyles from "../../assets/theme/views/admin/tables.js";
 
 const useStyles = makeStyles(componentStyles);
-
-let arr = [];
 
 const Search = (props) => {
   const classes = useStyles();

@@ -78,6 +78,16 @@ var routes = [
     item: []
   },
   {
+    id: 'paytm',
+    path: "/paytm",
+    name: "PayTM",
+    icon: Person,
+    iconColor: "WarningLight",
+    component: Paytm,
+    layout: "/admin",
+    item: []
+  },
+  {
     id: 'task-analytics',
     path: "/task-analytics",
     name: "Task Analytics",
