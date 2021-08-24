@@ -24,9 +24,7 @@ const EditForm = ({props}) => {
     'payout': null,
     'revenue': null,
     'totalcap': null,
-    'totalevents': null,
-    'del': null,
-    'edit': null,
+    'totalevents': null
   });
 
   const handleClickOpen = () => {

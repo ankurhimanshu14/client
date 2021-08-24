@@ -1,10 +1,15 @@
 import React from "react";
 
 // @material-ui/core components
+import clsx from 'clsx';
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -17,6 +22,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Radio from '@material-ui/core/Radio';
+import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors'
@@ -142,22 +148,25 @@ const Search = (props) => {
   let rowslength;
   rows.forEach(val => {rowslength = val.length})
 
-  // const[checked, setChecked] = React.useState(false);
-  // const[checklist, setChecklist] = React.useState({
-  //   selected: []
-  // });
-  
-  // const handleCheck = e => {
-  //   setChecked({...checked, [e.target.name] : e.target.checked });
-  //   arr.push(e.target.name);
-  //   setChecklist({checklist: arr});
-  // }
+  const [group, setGroup] = React.useState(new Set());
 
-  // console.log(checklist);
+  const handleGroupBy = () => {
+    rows.map(row => Object.values(row).map(r => group.add(r.amount)));
+    setGroup(group);
+  }
 
-  // const submitDelete = () => {
-  //   console.log(checklist);
-  // }
+  let arr = [];
+
+  group.forEach(val => arr.push(val));
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -321,6 +330,49 @@ const Search = (props) => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           /> : null}
           </Box>
+          <Grid container xs={12} justifyContent="flex-end" alignItems="flex-end">
+              <Box
+                justifyContent="flex-end"
+                display="flex"
+                flexWrap="wrap"
+              >
+                <Button
+                  variant="contained"
+                  color="info"
+                  margin="1rem!important"
+                  onClick={() => {handleGroupBy(); handleClickOpen();}}
+                  classes={classes.buttonRootUnselected}
+                >
+                  Group By Amount
+                </Button>
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                  <DialogTitle id="form-dialog-title"><Typography component="h6">Select Amount Values</Typography></DialogTitle>
+                  <DialogContent>
+                    {arr.map(v => (
+                      <FormControlLabel
+                      control={
+                        <Checkbox
+                        className={classes.root}
+                        disableRipple
+                        color="default"
+                        // checked={checked[row.name]}
+                        // onChange={handleCheck}
+                        // name={row.refercode}
+                        // value={checked}
+                        checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+                        icon={<span className={classes.icon} />}
+                        inputProps={{ 'aria-label': 'decorative checkbox' }}
+                        {...props}
+                      />
+                      }
+                      label={"Amount Value: " + v}
+                    />
+                    )
+                    )}
+                  </DialogContent>
+                </Dialog>
+              </Box>
+            </Grid>
         </Card>
       </Container>
     </>
