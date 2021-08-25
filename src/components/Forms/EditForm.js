@@ -43,7 +43,7 @@ const EditForm = ({props}) => {
     const requestOptions = {
       credentials: 'include',
       mode: 'cors',
-      method: 'DELETE',
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form)
     };
